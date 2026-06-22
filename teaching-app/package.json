@@ -1,0 +1,17 @@
+{
+  "name": "pageturner-teaching-app",
+  "version": "1.0.0",
+  "description": "PageTurner - the small bookstore app we build Playwright tests against during Day 2 and Day 3 of the workshop. (The lab uses BulkBox instead.)",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix frontend install",
+    "api": "json-server --watch mock-api/db.json --port 3101",
+    "frontend": "npm --prefix frontend run start",
+    "dev": "concurrently -n api,web -c magenta,green \"npm:api\" \"npm:frontend\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "json-server": "^0.17.4"
+  }
+}

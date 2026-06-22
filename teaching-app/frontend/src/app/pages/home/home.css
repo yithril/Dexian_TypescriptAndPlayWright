@@ -1,0 +1,161 @@
+.banner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: linear-gradient(120deg, var(--pt-paper-deep), var(--pt-white));
+  border: 1px solid var(--pt-line);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.banner__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--pt-clay);
+  margin: 0 0 0.5rem;
+}
+
+.banner__title {
+  font-size: 2.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.banner__sub {
+  color: var(--pt-ink-soft);
+  max-width: 36ch;
+  margin: 0 0 1.5rem;
+}
+
+.banner__art {
+  position: relative;
+  height: 200px;
+}
+
+.banner__cover {
+  position: absolute;
+  width: 120px;
+  height: 170px;
+  font-size: 1.8rem;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.banner__cover {
+  left: 30%;
+  top: 10px;
+  transform: rotate(-6deg);
+}
+
+.banner__cover--2 {
+  left: 10%;
+  top: 25px;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+
+.banner__cover--3 {
+  left: 52%;
+  top: 0;
+  transform: rotate(9deg);
+}
+
+.shelf {
+  margin-bottom: 2.5rem;
+}
+
+.shelf h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--pt-line);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.genre-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.genre-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: var(--pt-white);
+  border: 1px solid var(--pt-line);
+  border-radius: var(--pt-radius);
+  padding: 1.1rem;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.genre-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pt-shadow);
+}
+
+.genre-tile__name {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--pt-forest-deep);
+}
+
+.genre-tile__tag {
+  font-size: 0.85rem;
+  color: var(--pt-ink-soft);
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 1.25rem;
+}
+
+.bcard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: var(--pt-white);
+  border: 1px solid var(--pt-line);
+  border-radius: var(--pt-radius);
+  padding: 1rem;
+}
+
+.bcard__cover {
+  width: 100%;
+  height: 150px;
+  font-size: 1.6rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.bcard__title {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  color: var(--pt-ink);
+}
+
+.bcard__author {
+  font-size: 0.85rem;
+  color: var(--pt-ink-soft);
+}
+
+.bcard__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.bcard__price {
+  font-weight: 700;
+  color: var(--pt-forest-deep);
+}
+
+.bcard__btn {
+  padding: 0.35rem 0.9rem;
+}

@@ -1,0 +1,50 @@
+<div class="signin">
+  <div class="signin__card">
+    <h1>Sign in to PageTurner</h1>
+    <p class="signin__hint">Demo account: <strong>reader</strong> / <strong>books123</strong></p>
+
+    <form (submit)="submit(); $event.preventDefault()" novalidate data-testid="signin-form">
+      @if (error()) {
+        <div class="signin__error" role="alert" data-testid="signin-error">{{ error() }}</div>
+      }
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          [value]="username()"
+          (input)="username.set($any($event.target).value)"
+          [class.field__input--error]="usernameInvalid"
+          data-testid="user-field"
+        />
+        @if (usernameInvalid) {
+          <span class="field__error" data-testid="user-error">Username is required.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          [value]="password()"
+          (input)="password.set($any($event.target).value)"
+          [class.field__input--error]="passwordInvalid"
+          data-testid="pass-field"
+        />
+        @if (passwordInvalid) {
+          <span class="field__error" data-testid="pass-error">Password is required.</span>
+        }
+      </div>
+
+      <button type="submit" class="btn btn--primary signin__submit" [disabled]="pending()" data-testid="signin-btn">
+        {{ pending() ? 'Signing in...' : 'Sign in' }}
+      </button>
+    </form>
+  </div>
+</div>

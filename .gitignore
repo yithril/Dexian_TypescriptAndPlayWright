@@ -1,0 +1,27 @@
+# Dependencies / build output
+node_modules/
+dist/
+.angular/
+
+# Playwright artifacts
+test-results/
+playwright-report/
+playwright/.cache/
+blob-report/
+
+# Logs
+*.log
+
+# Local secrets - never commit
+*.key
+.env
+.env.local
+
+# Office temp lock files
+~$*
+
+# Instructor-only materials (NOT for students)
+TEACHING_PLAN.md
+
+# One-off tooling (remove after the images are fetched)
+bulkbox/scripts/

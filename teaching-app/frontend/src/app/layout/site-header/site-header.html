@@ -1,0 +1,59 @@
+<header class="masthead">
+  <div class="masthead__bar">
+    <a class="logo" routerLink="/" data-testid="logo-link">
+      <span class="logo__mark">&#9783;</span>
+      <span class="logo__name">PageTurner</span>
+    </a>
+
+    <form class="finder" role="search" (submit)="runSearch(); $event.preventDefault()">
+      <label class="finder__label" for="catalog-search">Search the catalog</label>
+      <input
+        id="catalog-search"
+        name="q"
+        type="search"
+        class="finder__input"
+        placeholder="Search by title, author or SKU"
+        [value]="query()"
+        (input)="query.set($any($event.target).value)"
+        data-testid="search-field"
+      />
+      <button type="submit" class="finder__go btn btn--primary" data-testid="search-go">Search</button>
+    </form>
+
+    <nav class="account-nav" aria-label="Account">
+      @if (account.isSignedIn()) {
+        <span class="account-nav__hello" data-testid="welcome-banner">
+          Welcome, {{ account.member()?.name }}
+        </span>
+        <button type="button" class="account-nav__btn" (click)="signOut()" data-testid="signout-btn">
+          Sign out
+        </button>
+      } @else {
+        <a class="account-nav__btn" routerLink="/signin" data-testid="account-link">Sign in</a>
+      }
+      <a class="basket-link" routerLink="/basket" data-testid="basket-link" aria-label="Basket">
+        <span class="basket-link__icon" aria-hidden="true">&#128717;</span>
+        Basket
+        <span class="basket-link__badge" data-testid="basket-count">{{ basket.count() }}</span>
+      </a>
+    </nav>
+  </div>
+
+  <nav class="genre-strip" aria-label="Browse genres">
+    <a
+      class="genre-strip__link"
+      routerLink="/catalog"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      data-testid="nav-catalog"
+    >All books</a>
+    @for (genre of genres(); track genre.id) {
+      <a
+        class="genre-strip__link"
+        routerLink="/catalog"
+        [queryParams]="{ genre: genre.slug }"
+        [attr.data-testid]="'genre-nav-' + genre.slug"
+      >{{ genre.name }}</a>
+    }
+  </nav>
+</header>

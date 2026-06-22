@@ -1,0 +1,65 @@
+@if (book(); as book) {
+  <nav class="crumbs">
+    <a routerLink="/">Home</a> /
+    <a routerLink="/catalog">Catalog</a> /
+    <span>{{ book.title }}</span>
+  </nav>
+
+  <div class="detail" data-testid="book-detail">
+    <div class="detail__media">
+      <span class="cover detail__cover">{{ cover() }}</span>
+    </div>
+
+    <div class="detail__info">
+      <h1 data-testid="book-title">{{ book.title }}</h1>
+      <div class="detail__author" data-testid="book-author">by {{ book.author }}</div>
+      <div class="detail__sku" data-testid="book-sku">SKU {{ book.sku }} &middot; {{ book.format }}</div>
+
+      @if (book.stock > 0) {
+        <span class="pill pill--stocked" data-testid="stock-status">{{ book.stock }} in stock</span>
+      } @else {
+        <span class="pill pill--out" data-testid="stock-status">Out of stock</span>
+      }
+
+      <p class="detail__blurb">{{ book.blurb }}</p>
+
+      <div class="detail__price" data-testid="book-price">{{ book.price | currency }}</div>
+
+      <div class="counter">
+        <label class="counter__label" for="count">Quantity</label>
+        <div class="counter__control">
+          <button type="button" class="counter__btn" (click)="decrement()" data-testid="count-minus" aria-label="Decrease quantity">-</button>
+          <input
+            id="count"
+            class="counter__input"
+            type="number"
+            min="1"
+            [value]="quantity()"
+            (input)="setQuantity($any($event.target).value)"
+            data-testid="count-field"
+          />
+          <button type="button" class="counter__btn" (click)="increment()" data-testid="count-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <div class="detail__actions">
+        <button
+          type="button"
+          class="btn btn--primary"
+          (click)="addToBasket()"
+          [disabled]="book.stock === 0"
+          data-testid="add-to-basket"
+        >Add to basket</button>
+        @if (added()) {
+          <button type="button" class="btn btn--ghost" (click)="goToBasket()" data-testid="view-basket">View basket</button>
+        }
+      </div>
+
+      @if (added()) {
+        <p class="detail__added" role="status" data-testid="basket-confirm">Added to your basket.</p>
+      }
+    </div>
+  </div>
+} @else {
+  <p data-testid="loading">Loading book...</p>
+}

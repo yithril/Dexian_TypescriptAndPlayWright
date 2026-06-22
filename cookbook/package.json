@@ -1,0 +1,17 @@
+{
+  "name": "bulkbox-cookbook",
+  "version": "1.0.0",
+  "description": "Student-facing Playwright cookbook: self-contained reference scenarios that run against the BulkBox sample app.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^26.0.0"
+  }
+}

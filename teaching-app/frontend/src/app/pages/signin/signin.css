@@ -1,0 +1,76 @@
+.signin {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.signin__card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--pt-white);
+  border: 1px solid var(--pt-line);
+  border-radius: 14px;
+  box-shadow: var(--pt-shadow);
+  padding: 2rem;
+}
+
+.signin__card h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.signin__hint {
+  color: var(--pt-ink-soft);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.signin__error {
+  background: #f6e2d8;
+  color: var(--pt-clay);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.field {
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--pt-line);
+  border-radius: 8px;
+  font: inherit;
+  background: var(--pt-paper);
+}
+
+.field input:focus {
+  outline: 2px solid var(--pt-forest);
+  outline-offset: 1px;
+}
+
+.field__input--error {
+  border-color: var(--pt-clay);
+}
+
+.field__error {
+  display: block;
+  color: var(--pt-clay);
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+}
+
+.signin__submit {
+  width: 100%;
+  margin-top: 0.5rem;
+}

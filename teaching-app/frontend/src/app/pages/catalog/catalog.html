@@ -1,0 +1,101 @@
+<div class="catalog">
+  <aside class="refine" data-testid="refine-panel">
+    <h2 class="refine__title">Refine</h2>
+
+    <fieldset class="refine__group">
+      <legend>Genre</legend>
+      <label class="opt">
+        <input
+          type="radio"
+          name="genre"
+          value="any"
+          [checked]="genre() === 'any'"
+          (change)="setGenre('any')"
+          data-testid="genre-any"
+        />
+        All genres
+      </label>
+      @for (g of genres(); track g.id) {
+        <label class="opt">
+          <input
+            type="radio"
+            name="genre"
+            [value]="g.slug"
+            [checked]="genre() === g.slug"
+            (change)="setGenre(g.slug)"
+            [attr.data-testid]="'genre-' + g.slug"
+          />
+          {{ g.name }}
+        </label>
+      }
+    </fieldset>
+
+    <fieldset class="refine__group">
+      <legend>Availability</legend>
+      <label class="opt">
+        <input
+          type="checkbox"
+          [checked]="inStockOnly()"
+          (change)="toggleStock($any($event.target).checked)"
+          data-testid="available-only"
+        />
+        In stock only
+      </label>
+    </fieldset>
+
+    <fieldset class="refine__group">
+      <legend><label for="order-by">Sort by</label></legend>
+      <select
+        id="order-by"
+        class="refine__select"
+        (change)="setSort($any($event.target).value)"
+        data-testid="order-by"
+      >
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="title-az">Title: A to Z</option>
+      </select>
+    </fieldset>
+  </aside>
+
+  <section class="listing">
+    <div class="listing__head">
+      <h1 data-testid="catalog-heading">
+        @if (search()) {
+          Results for "{{ search() }}"
+        } @else {
+          All books
+        }
+      </h1>
+      <div class="listing__meta">
+        <span data-testid="match-count">{{ visibleBooks().length }}</span> books
+      </div>
+    </div>
+
+    @if (search()) {
+      <div class="chips" data-testid="active-search">
+        <span class="chip">
+          <span class="chip__text">{{ search() }}</span>
+          <button
+            type="button"
+            class="chip__x"
+            (click)="clearSearch()"
+            data-testid="clear-search"
+            aria-label="Clear search"
+          >&times;</button>
+        </span>
+      </div>
+    }
+
+    @if (loading()) {
+      <p class="listing__loading" data-testid="loading">Loading books...</p>
+    } @else if (visibleBooks().length === 0) {
+      <p class="listing__empty" data-testid="empty-state">No books match your filters.</p>
+    }
+
+    @if (!loading()) {
+      <app-book-list [books]="visibleBooks()" (add)="addToBasket($event)" />
+    }
+  </section>
+</div>

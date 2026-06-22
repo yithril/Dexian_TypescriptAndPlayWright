@@ -1,0 +1,123 @@
+.masthead {
+  background: var(--pt-white);
+  border-bottom: 1px solid var(--pt-line);
+  box-shadow: var(--pt-shadow);
+}
+
+.masthead__bar {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.9rem 1.25rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--pt-forest-deep);
+}
+
+.logo__mark {
+  font-size: 1.5rem;
+  color: var(--pt-clay);
+}
+
+.finder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.finder__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.finder__input {
+  flex: 1;
+  border: 1px solid var(--pt-line);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  background: var(--pt-paper);
+}
+
+.finder__input:focus {
+  outline: 2px solid var(--pt-forest);
+  outline-offset: 1px;
+}
+
+.account-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.account-nav__hello {
+  font-size: 0.9rem;
+  color: var(--pt-ink-soft);
+}
+
+.account-nav__btn {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  color: var(--pt-forest-deep);
+  font-weight: 600;
+}
+
+.basket-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--pt-ink);
+}
+
+.basket-link__badge {
+  background: var(--pt-clay);
+  color: var(--pt-white);
+  border-radius: 999px;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  padding: 0 0.35rem;
+}
+
+.genre-strip {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  padding: 0.5rem 1.25rem 0.75rem;
+  border-top: 1px solid var(--pt-line);
+}
+
+.genre-strip__link {
+  font-size: 0.9rem;
+  color: var(--pt-ink-soft);
+  padding: 0.15rem 0;
+  border-bottom: 2px solid transparent;
+}
+
+.genre-strip__link:hover,
+.genre-strip__link.is-active {
+  color: var(--pt-forest-deep);
+  border-bottom-color: var(--pt-clay);
+}

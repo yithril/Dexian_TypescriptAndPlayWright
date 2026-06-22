@@ -1,0 +1,52 @@
+<section class="banner" data-testid="home-banner">
+  <div class="banner__text">
+    <p class="banner__eyebrow">Independent online bookshop</p>
+    <h1 class="banner__title">Find your next favorite book.</h1>
+    <p class="banner__sub">
+      Hand-picked fiction, mysteries, sci-fi, cookbooks and stories for little readers - with
+      next-day dispatch.
+    </p>
+    <a class="btn btn--primary" routerLink="/catalog" data-testid="browse-books">Browse the catalog</a>
+  </div>
+  <div class="banner__art" aria-hidden="true">
+    <span class="cover banner__cover">PT</span>
+    <span class="cover cover--clay banner__cover banner__cover--2">RE</span>
+    <span class="cover cover--ink banner__cover banner__cover--3">AD</span>
+  </div>
+</section>
+
+<section class="shelf">
+  <h2>Browse by genre</h2>
+  <div class="genre-tiles" data-testid="genre-tiles">
+    @for (genre of genres(); track genre.id) {
+      <a
+        class="genre-tile"
+        routerLink="/catalog"
+        [queryParams]="{ genre: genre.slug }"
+        [attr.data-testid]="'genre-tile-' + genre.slug"
+      >
+        <span class="genre-tile__name">{{ genre.name }}</span>
+        <span class="genre-tile__tag">{{ genre.tagline }}</span>
+      </a>
+    }
+  </div>
+</section>
+
+<section class="shelf">
+  <h2>Featured this week</h2>
+  <div class="featured" data-testid="featured-shelf">
+    @for (book of featured(); track book.id) {
+      <article class="bcard" [attr.data-testid]="'featured-card-' + book.id">
+        <a [routerLink]="['/catalog', book.id]" class="bcard__cover-link">
+          <span class="cover bcard__cover">{{ initials(book.title) }}</span>
+        </a>
+        <a class="bcard__title" [routerLink]="['/catalog', book.id]">{{ book.title }}</a>
+        <div class="bcard__author">{{ book.author }}</div>
+        <div class="bcard__row">
+          <span class="bcard__price">{{ book.price | currency }}</span>
+          <button type="button" class="btn btn--ghost bcard__btn" (click)="addToBasket(book)">Add</button>
+        </div>
+      </article>
+    }
+  </div>
+</section>

@@ -1,0 +1,29 @@
+{
+  "genres": [
+    { "id": 1, "name": "Fiction", "slug": "fiction", "tagline": "Stories worth the late night" },
+    { "id": 2, "name": "Mystery", "slug": "mystery", "tagline": "Whodunits and slow burns" },
+    { "id": 3, "name": "Science Fiction", "slug": "scifi", "tagline": "Worlds a little ahead of ours" },
+    { "id": 4, "name": "Children", "slug": "children", "tagline": "Read-aloud favorites" },
+    { "id": 5, "name": "Cooking", "slug": "cooking", "tagline": "From weeknight to weekend" }
+  ],
+  "books": [
+    { "id": 1, "sku": "PT-1001", "title": "The Silent Library", "author": "Maya Greene", "genre": "fiction", "format": "Paperback", "price": 14.99, "stock": 24, "blurb": "A reclusive archivist discovers a book that should not exist." },
+    { "id": 2, "sku": "PT-1002", "title": "The Silent Library", "author": "Maya Greene", "genre": "fiction", "format": "Hardcover", "price": 24.99, "stock": 12, "blurb": "The collector's hardcover edition. Same story as PT-1001, sturdier binding." },
+    { "id": 3, "sku": "PT-1010", "title": "Northbound", "author": "Ezra Vance", "genre": "fiction", "format": "Paperback", "price": 11.50, "stock": 0, "blurb": "Two strangers share a long winter drive and a longer secret." },
+    { "id": 4, "sku": "PT-2001", "title": "Whispers in the Fog", "author": "Dahlia Crane", "genre": "mystery", "format": "Paperback", "price": 9.99, "stock": 40, "blurb": "A seaside town, a missing lighthouse keeper, and one stubborn detective." },
+    { "id": 5, "sku": "PT-2002", "title": "The Last Alibi", "author": "Roman Hart", "genre": "mystery", "format": "Paperback", "price": 12.25, "stock": 5, "blurb": "Every witness is lying. The trick is figuring out about what." },
+    { "id": 6, "sku": "PT-2003", "title": "Whispers in the Fog", "author": "Dahlia Crane", "genre": "mystery", "format": "Large Print", "price": 13.99, "stock": 18, "blurb": "The large-print edition. Same title as PT-2001, easier on the eyes." },
+    { "id": 7, "sku": "PT-3001", "title": "Quantum Drift", "author": "Dr. Iris Cho", "genre": "scifi", "format": "Paperback", "price": 16.00, "stock": 30, "blurb": "A physicist wakes up one second before the universe forgets her." },
+    { "id": 8, "sku": "PT-3002", "title": "The Mars Accord", "author": "Leon Pike", "genre": "scifi", "format": "Paperback", "price": 18.75, "stock": 0, "blurb": "Diplomacy is hard. Diplomacy at light-speed delay is harder." },
+    { "id": 9, "sku": "PT-3003", "title": "Echoes of Andromeda", "author": "Nova Reyes", "genre": "scifi", "format": "Hardcover", "price": 21.00, "stock": 9, "blurb": "A generation ship hears a reply it was never meant to receive." },
+    { "id": 10, "sku": "PT-4001", "title": "The Sleepy Dragon", "author": "Patty Bloom", "genre": "children", "format": "Hardcover", "price": 7.99, "stock": 100, "blurb": "A bedtime story for the dragon who simply will not yawn." },
+    { "id": 11, "sku": "PT-4002", "title": "Counting Stars", "author": "Sam Willow", "genre": "children", "format": "Board Book", "price": 6.50, "stock": 60, "blurb": "Count from one sleepy owl to ten twinkling stars." },
+    { "id": 12, "sku": "PT-5001", "title": "Weeknight Wonders", "author": "Nina Ortiz", "genre": "cooking", "format": "Paperback", "price": 22.00, "stock": 15, "blurb": "Sixty dinners, none of them longer than thirty minutes." },
+    { "id": 13, "sku": "PT-5002", "title": "The Sourdough Almanac", "author": "Bram Fields", "genre": "cooking", "format": "Hardcover", "price": 27.50, "stock": 0, "blurb": "A year of bread, one stubborn starter at a time." },
+    { "id": 14, "sku": "PT-5003", "title": "One Pot, Many Meals", "author": "Nina Ortiz", "genre": "cooking", "format": "Paperback", "price": 19.99, "stock": 22, "blurb": "Less washing up, more eating. A whole shelf of one-pot dinners." }
+  ],
+  "members": [
+    { "id": 1, "username": "reader", "password": "books123", "name": "Robin Reader" },
+    { "id": 2, "username": "member", "password": "shelf456", "name": "Casey Member" }
+  ]
+}

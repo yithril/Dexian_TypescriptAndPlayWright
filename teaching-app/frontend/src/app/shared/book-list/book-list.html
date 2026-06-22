@@ -1,0 +1,27 @@
+<div class="vlist" role="table" aria-label="Catalog results">
+  @for (book of books(); track book.id) {
+    <div class="vlist__r4k" role="row">
+      <div class="vlist__c1" role="cell">
+        <a [routerLink]="['/catalog', book.id]">
+          <span class="cover vlist__art" [class]="coverClass(book.genre)">{{ initials(book.title) }}</span>
+        </a>
+      </div>
+      <div class="vlist__c2" role="cell">
+        <a class="vlist__ttl" [routerLink]="['/catalog', book.id]">{{ book.title }}</a>
+        <div class="vlist__by">{{ book.author }}</div>
+        <div class="vlist__meta">{{ book.format }} &middot; SKU {{ book.sku }}</div>
+        @if (book.stock > 0) {
+          <span class="pill pill--stocked">In stock</span>
+        } @else {
+          <span class="pill pill--out">Out of stock</span>
+        }
+      </div>
+      <div class="vlist__c3" role="cell">
+        <div class="vlist__cost">{{ book.price | currency }}</div>
+        <button type="button" class="btn btn--primary" (click)="add.emit(book)" [disabled]="book.stock === 0">
+          Add to basket
+        </button>
+      </div>
+    </div>
+  }
+</div>
