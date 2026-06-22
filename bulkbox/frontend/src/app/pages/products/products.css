@@ -1,0 +1,117 @@
+.products {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.filters {
+  background: var(--bb-white);
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  padding: 1.1rem;
+  position: sticky;
+  top: 96px;
+}
+
+.filters__title {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.filters__group {
+  border: none;
+  border-top: 1px solid var(--bb-line);
+  padding: 0.85rem 0 0;
+  margin: 0 0 0.85rem;
+}
+
+.filters__group legend {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--bb-ink-soft);
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.radio,
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--bb-line);
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.results__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.results__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--bb-ink-soft);
+  font-size: 0.95rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bb-ink);
+  color: var(--bb-white);
+  border-radius: 999px;
+  padding: 0.35rem 0.4rem 0.35rem 0.85rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.chip__remove {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--bb-white);
+  cursor: pointer;
+  font-size: 0.78rem;
+}
+
+.chip__remove:hover {
+  background: var(--bb-yellow);
+  color: var(--bb-ink);
+}
+
+.empty {
+  background: var(--bb-white);
+  border: 1px dashed var(--bb-line);
+  border-radius: var(--bb-radius);
+  padding: 2rem;
+  text-align: center;
+  color: var(--bb-ink-soft);
+}
+

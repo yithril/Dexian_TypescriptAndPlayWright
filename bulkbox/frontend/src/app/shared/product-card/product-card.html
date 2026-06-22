@@ -1,0 +1,21 @@
+<article class="pcard" [attr.data-testid]="'product-card-' + product().id">
+  <a class="pcard__media" [routerLink]="['/products', product().id]">
+    <img [src]="product().image" [alt]="product().name" />
+  </a>
+  <div class="pcard__body">
+    <a class="pcard__name" [routerLink]="['/products', product().id]">{{ product().name }}</a>
+    <div class="pcard__model">Model {{ product().model }}</div>
+    <div class="pcard__row">
+      <span class="pcard__price">{{ product().price | currency }}</span>
+      <button
+        type="button"
+        class="btn btn--primary"
+        (click)="add.emit(product())"
+        [attr.data-testid]="'add-to-cart-' + product().id"
+      >
+        <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+        Add
+      </button>
+    </div>
+  </div>
+</article>

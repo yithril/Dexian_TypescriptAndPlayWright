@@ -1,0 +1,151 @@
+.cart-empty {
+  background: var(--bb-white);
+  border: 1px dashed var(--bb-line);
+  border-radius: var(--bb-radius);
+  padding: 3rem;
+  text-align: center;
+}
+
+.cart-empty__icon {
+  font-size: 2.5rem;
+  color: var(--bb-line);
+  margin-bottom: 0.75rem;
+}
+
+.cart-empty p {
+  color: var(--bb-ink-soft);
+  margin-bottom: 1rem;
+}
+
+.cart {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.cart__lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 80px 1fr auto auto auto;
+  gap: 1rem;
+  align-items: center;
+  background: var(--bb-white);
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  padding: 0.85rem;
+}
+
+.line__img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #eef1f6;
+}
+
+.line__name {
+  font-weight: 700;
+}
+
+.line__model,
+.line__unit {
+  font-size: 0.85rem;
+  color: var(--bb-ink-soft);
+}
+
+.line__qty {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.line__qty-label {
+  font-size: 0.78rem;
+  color: var(--bb-ink-soft);
+}
+
+.line__qty-input {
+  width: 64px;
+  padding: 0.4rem;
+  border: 1px solid var(--bb-line);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.line__total {
+  font-weight: 800;
+  min-width: 80px;
+  text-align: right;
+}
+
+.summary {
+  background: var(--bb-white);
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  padding: 1.25rem;
+  position: sticky;
+  top: 96px;
+}
+
+.summary__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  color: var(--bb-ink-soft);
+}
+
+.summary__row--total {
+  border-top: 1px solid var(--bb-line);
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--bb-ink);
+}
+
+.summary__checkout {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--bb-white);
+  border-radius: var(--bb-radius);
+  padding: 1.5rem;
+  width: min(90vw, 380px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+}
+
+.modal__body {
+  margin: 0 0 1.25rem;
+  color: var(--bb-ink-soft);
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}

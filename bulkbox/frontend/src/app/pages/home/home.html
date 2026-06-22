@@ -1,0 +1,45 @@
+<section class="hero" data-testid="hero">
+  <div class="hero__text">
+    <h1 class="hero__title">Industrial &amp; shipping supplies, shipped fast.</h1>
+    <p class="hero__sub">
+      Over 1,700 products in stock - boxes, tape, bags, safety gear and material handling.
+    </p>
+    <a class="btn btn--primary" routerLink="/products" data-testid="shop-all">Shop all products</a>
+  </div>
+  <div class="hero__panel">
+    <i class="fa-solid fa-truck-fast hero__panel-icon" aria-hidden="true"></i>
+    Order by 6 PM for same-day shipping.
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>Shop by category</h2>
+  <div class="cat-grid" data-testid="category-grid">
+    @for (cat of categories(); track cat.id) {
+      <a
+        class="cat-card"
+        [routerLink]="['/products']"
+        [queryParams]="{ category: cat.slug }"
+        [attr.data-testid]="'category-' + cat.slug"
+      >
+        <img class="cat-card__img" [src]="cat.image" [alt]="cat.name" loading="lazy" />
+        <span class="cat-card__body">
+          <span class="cat-card__name">{{ cat.name }}</span>
+          <span class="cat-card__count">{{ cat.subcategories.length }} types</span>
+        </span>
+      </a>
+    }
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>Featured products</h2>
+  @if (loading()) {
+    <app-spinner label="Loading products..." />
+  }
+  <div class="featured-grid" data-testid="featured-grid">
+    @for (product of featured(); track product.id) {
+      <app-product-card [product]="product" (add)="addToCart($event)" />
+    }
+  </div>
+</section>

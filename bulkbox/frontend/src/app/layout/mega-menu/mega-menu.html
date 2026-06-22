@@ -1,0 +1,33 @@
+<!--
+  NOTE FOR THE WORKSHOP: this category mega-menu is an intentionally "messy"
+  zone. It mimics third-party / legacy markup you do NOT control: nested divs,
+  hashed-looking class names, and no data-testid hooks. Use role/text based
+  locators here, not CSS class selectors.
+-->
+<div class="x7f2a_nav">
+  <button type="button" class="x7f2a_nav__toggle" (click)="toggleMenu()" aria-haspopup="true">
+    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    Shop by Category
+    <i class="fa-solid" [class.fa-chevron-down]="!menuOpen()" [class.fa-chevron-up]="menuOpen()" aria-hidden="true"></i>
+  </button>
+  @if (menuOpen()) {
+    <div class="x7f2a_nav__panel">
+      @for (cat of categories(); track cat.id) {
+        <div class="x7f2a_col">
+          <div class="x7f2a_col__head">{{ cat.name }}</div>
+          <div class="x7f2a_col__items">
+            @for (sub of cat.subcategories; track sub) {
+              <a
+                class="x7f2a_col__link"
+                [routerLink]="['/products']"
+                [queryParams]="{ category: cat.slug }"
+                (click)="closeMenu()"
+                >{{ sub }}</a
+              >
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

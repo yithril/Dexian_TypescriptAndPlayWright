@@ -1,0 +1,100 @@
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 340px;
+  background:
+    linear-gradient(115deg, rgba(15, 23, 42, 0.92) 30%, rgba(15, 23, 42, 0.55) 100%),
+    url('/hero/hero-warehouse.jpg') center / cover no-repeat;
+  color: var(--bb-white);
+  border-radius: var(--bb-radius);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero__title {
+  color: var(--bb-white);
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero__sub {
+  color: #d4dbe7;
+  margin-bottom: 1.5rem;
+  max-width: 32rem;
+}
+
+.hero__panel {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  background: var(--bb-yellow);
+  color: var(--bb-ink);
+  font-weight: 700;
+  border-radius: var(--bb-radius);
+  padding: 1.5rem;
+}
+
+.hero__panel-icon {
+  font-size: 1.9rem;
+}
+
+.home-section {
+  margin-bottom: 2.5rem;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bb-white);
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.05s ease;
+}
+
+.cat-card:hover {
+  border-color: var(--bb-yellow-dark);
+  transform: translateY(-2px);
+}
+
+.cat-card__img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+}
+
+.cat-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem 1.1rem;
+}
+
+.cat-card__name {
+  font-weight: 700;
+}
+
+.cat-card__count {
+  font-size: 0.85rem;
+  color: var(--bb-ink-soft);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.featured-grid app-product-card {
+  display: block;
+}

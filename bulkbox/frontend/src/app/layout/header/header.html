@@ -1,0 +1,82 @@
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" routerLink="/" data-testid="brand-home">
+      <span class="brand__mark">BB</span>
+      <span class="brand__name">BulkBox</span>
+    </a>
+
+    <form class="search" (submit)="search(); $event.preventDefault()" role="search">
+      <label class="search__label" for="site-search">Search products</label>
+      <input
+        id="site-search"
+        name="q"
+        type="search"
+        class="search__input"
+        placeholder="Search by name or model #"
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+        data-testid="search-input"
+      />
+      <button type="submit" class="search__btn" data-testid="search-button">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span class="search__btn-text">Search</span>
+      </button>
+    </form>
+
+    <nav class="account" aria-label="Account">
+      @if (auth.isLoggedIn()) {
+        <span class="account__hello" data-testid="account-greeting">
+          <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+          Hi, {{ auth.user()?.name }}
+        </span>
+        <button type="button" class="account__link" (click)="logout()" data-testid="logout-button">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+          Sign Out
+        </button>
+      } @else {
+        <a class="account__link" routerLink="/login" data-testid="signin-link">
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          Sign In
+        </a>
+      }
+      <a class="cart-link" routerLink="/cart" data-testid="cart-link" aria-label="Cart">
+        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        <span class="cart-link__badge" data-testid="cart-count">{{ cart.count() }}</span>
+      </a>
+    </nav>
+  </div>
+
+  <app-mega-menu />
+
+  <nav class="primary-nav" aria-label="Primary">
+    <div class="primary-nav__inner">
+      <a
+        class="primary-nav__link"
+        routerLink="/products"
+        routerLinkActive="is-active"
+        data-testid="nav-products"
+      >
+        <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
+        Products
+      </a>
+      <a
+        class="primary-nav__link"
+        routerLink="/quick-order"
+        routerLinkActive="is-active"
+        data-testid="nav-quick-order"
+      >
+        <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+        Quick Order
+      </a>
+      <a
+        class="primary-nav__link"
+        routerLink="/orders"
+        routerLinkActive="is-active"
+        data-testid="nav-orders"
+      >
+        <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+        Orders
+      </a>
+    </div>
+  </nav>
+</header>

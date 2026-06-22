@@ -1,0 +1,54 @@
+<div class="login">
+  <div class="login__card">
+    <h1>Sign in to BulkBox</h1>
+    <p class="login__hint">Demo account: <strong>buyer</strong> / <strong>supplies123</strong></p>
+
+    <form (submit)="submit(); $event.preventDefault()" novalidate data-testid="login-form">
+      @if (error()) {
+        <div class="login__error" role="alert" data-testid="login-error">
+          <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+          {{ error() }}
+        </div>
+      }
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          [value]="username()"
+          (input)="username.set($any($event.target).value)"
+          [class.field__input--error]="usernameInvalid"
+          data-testid="username"
+        />
+        @if (usernameInvalid) {
+          <span class="field__error" data-testid="username-error">Username is required.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          [value]="password()"
+          (input)="password.set($any($event.target).value)"
+          [class.field__input--error]="passwordInvalid"
+          data-testid="password"
+        />
+        @if (passwordInvalid) {
+          <span class="field__error" data-testid="password-error">Password is required.</span>
+        }
+      </div>
+
+      <button type="submit" class="btn btn--primary login__submit" [disabled]="pending()" data-testid="login-submit">
+        <i class="fa-solid" [class.fa-right-to-bracket]="!pending()" [class.fa-spinner]="pending()" [class.fa-spin]="pending()" aria-hidden="true"></i>
+        {{ pending() ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+  </div>
+</div>

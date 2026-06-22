@@ -1,0 +1,91 @@
+<h1>Your cart</h1>
+
+@if (cart.items().length === 0) {
+  <div class="cart-empty" data-testid="cart-empty">
+    <i class="fa-solid fa-cart-shopping cart-empty__icon" aria-hidden="true"></i>
+    <p>Your cart is empty.</p>
+    <a class="btn btn--primary" routerLink="/products">Browse products</a>
+  </div>
+} @else {
+  <div class="cart">
+    <ul class="cart__lines" data-testid="cart-lines">
+      @for (line of cart.items(); track line.product.id) {
+        <li class="line" [attr.data-testid]="'cart-line-' + line.product.id">
+          <img class="line__img" [src]="line.product.image" [alt]="line.product.name" />
+          <div class="line__info">
+            <a class="line__name" [routerLink]="['/products', line.product.id]">{{ line.product.name }}</a>
+            <div class="line__model">Model {{ line.product.model }}</div>
+            <div class="line__unit">{{ line.product.price | currency }} each</div>
+          </div>
+          <div class="line__qty">
+            <label class="line__qty-label" [attr.for]="'qty-' + line.product.id">Qty</label>
+            <input
+              [id]="'qty-' + line.product.id"
+              type="number"
+              min="0"
+              class="line__qty-input"
+              [value]="line.quantity"
+              (change)="changeQuantity(line.product.id, $any($event.target).value)"
+              [attr.data-testid]="'cart-qty-' + line.product.id"
+            />
+          </div>
+          <div class="line__total" [attr.data-testid]="'cart-line-total-' + line.product.id">
+            {{ line.product.price * line.quantity | currency }}
+          </div>
+          <button
+            type="button"
+            class="btn btn--danger"
+            (click)="askRemove(line.product.id)"
+            [attr.data-testid]="'cart-remove-' + line.product.id"
+            aria-label="Remove item"
+          >
+            <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+            Remove
+          </button>
+        </li>
+      }
+    </ul>
+
+    <aside class="summary" data-testid="cart-summary">
+      <h2>Summary</h2>
+      <div class="summary__row">
+        <span>Items</span>
+        <span data-testid="summary-count">{{ cart.count() }}</span>
+      </div>
+      <div class="summary__row summary__row--total">
+        <span>Subtotal</span>
+        <span data-testid="summary-subtotal">{{ cart.subtotal() | currency }}</span>
+      </div>
+      <a routerLink="/checkout" class="btn btn--primary summary__checkout" data-testid="checkout-button">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        Proceed to checkout
+      </a>
+    </aside>
+  </div>
+}
+
+@if (pendingRemoveId() !== null) {
+  <div class="modal-backdrop" data-testid="modal-backdrop" (click)="cancelRemove()">
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="confirm-title"
+      data-testid="confirm-dialog"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 id="confirm-title" class="modal__title">Remove item?</h2>
+      <p class="modal__body">
+        Remove <strong>{{ pendingRemoveName() }}</strong> from your cart?
+      </p>
+      <div class="modal__actions">
+        <button type="button" class="btn btn--ghost" (click)="cancelRemove()" data-testid="cancel-remove">
+          Cancel
+        </button>
+        <button type="button" class="btn btn--danger" (click)="confirmRemove()" data-testid="confirm-remove">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+}

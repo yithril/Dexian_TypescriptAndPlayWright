@@ -1,0 +1,30 @@
+<!--
+  MESSY ZONE: this grid simulates a third-party data grid we do NOT control.
+  Hashed class names, nested divs, role attributes but no data-testid hooks,
+  and some duplicated product names. Locate rows by role/text + filter().
+-->
+<div class="gx_grid" role="table" aria-label="Product results">
+  @for (product of products(); track product.id) {
+    <div class="gx_grid__r9c1" role="row">
+      <div class="gx_grid__m2" role="cell">
+        <a [routerLink]="['/products', product.id]">
+          <img class="gx_grid__img" [src]="product.image" [alt]="product.name" />
+        </a>
+      </div>
+      <div class="gx_grid__d4" role="cell">
+        <a class="gx_grid__nm" [routerLink]="['/products', product.id]">{{ product.name }}</a>
+        <div class="gx_grid__sm">{{ product.subcategory }} &middot; Model {{ product.model }}</div>
+        <div class="gx_grid__avail">
+          <app-stock-badge [stock]="product.stock" />
+        </div>
+      </div>
+      <div class="gx_grid__p7" role="cell">
+        <div class="gx_grid__price">{{ product.price | currency }}</div>
+        <button type="button" class="btn btn--primary" (click)="add.emit(product)">
+          <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+          Add to cart
+        </button>
+      </div>
+    </div>
+  }
+</div>

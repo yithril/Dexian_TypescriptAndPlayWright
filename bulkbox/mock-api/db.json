@@ -1,0 +1,46 @@
+{
+  "categories": [
+    { "id": 1, "name": "Boxes", "slug": "boxes", "image": "/categories/boxes.jpg", "subcategories": ["Corrugated Boxes", "Mailing Boxes", "Storage Boxes"] },
+    { "id": 2, "name": "Tape", "slug": "tape", "image": "/categories/tape.jpg", "subcategories": ["Packing Tape", "Masking Tape", "Duct Tape"] },
+    { "id": 3, "name": "Bags", "slug": "bags", "image": "/categories/bags.jpg", "subcategories": ["Poly Bags", "Zip Bags", "Trash Bags"] },
+    { "id": 4, "name": "Safety", "slug": "safety", "image": "/categories/safety.jpg", "subcategories": ["Gloves", "Glasses", "Vests"] },
+    { "id": 5, "name": "Material Handling", "slug": "material-handling", "image": "/categories/material-handling.jpg", "subcategories": ["Carts", "Hand Trucks", "Shelving"] }
+  ],
+  "products": [
+    { "id": 1, "model": "S-4612", "name": "Corrugated Shipping Box", "category": "boxes", "subcategory": "Corrugated Boxes", "price": 1.29, "image": "/products/s-4612-corrugated-box.jpg", "stock": 480, "description": "200 lb. test corrugated box for everyday shipping. Sold in bundles of 25." },
+    { "id": 2, "model": "S-4614", "name": "Corrugated Shipping Box", "category": "boxes", "subcategory": "Corrugated Boxes", "price": 1.59, "image": "/products/s-4614-corrugated-box-large.jpg", "stock": 320, "description": "Larger 200 lb. test corrugated box. Same product family as S-4612, different size. Sold in bundles of 25." },
+    { "id": 3, "model": "S-1088", "name": "Mailing Box", "category": "boxes", "subcategory": "Mailing Boxes", "price": 0.89, "image": "/products/s-1088-mailing-box.jpg", "stock": 600, "description": "Lightweight white mailing box, ideal for small parcels." },
+    { "id": 4, "model": "S-2200", "name": "Heavy-Duty Storage Box", "category": "boxes", "subcategory": "Storage Boxes", "price": 3.49, "image": "/products/s-2200-storage-box.jpg", "stock": 150, "description": "Double-wall storage box with lid for long-term archiving." },
+    { "id": 5, "model": "S-423", "name": "Packing Tape", "category": "tape", "subcategory": "Packing Tape", "price": 2.19, "image": "/products/s-423-packing-tape.jpg", "stock": 900, "description": "Clear acrylic packing tape, 2 in. x 110 yd." },
+    { "id": 6, "model": "S-425", "name": "Packing Tape", "category": "tape", "subcategory": "Packing Tape", "price": 2.89, "image": "/products/s-425-packing-tape-hd.jpg", "stock": 0, "description": "Heavy-duty hot-melt packing tape. Same name as S-423, stronger adhesive." },
+    { "id": 7, "model": "S-512", "name": "Masking Tape", "category": "tape", "subcategory": "Masking Tape", "price": 1.75, "image": "/products/s-512-masking-tape.jpg", "stock": 410, "description": "General-purpose masking tape, 1 in. x 60 yd." },
+    { "id": 8, "model": "S-700", "name": "Duct Tape", "category": "tape", "subcategory": "Duct Tape", "price": 4.25, "image": "/products/s-700-duct-tape.jpg", "stock": 220, "description": "Industrial silver duct tape, 2 in. x 60 yd." },
+    { "id": 9, "model": "S-1500", "name": "Poly Bag", "category": "bags", "subcategory": "Poly Bags", "price": 0.12, "image": "/products/s-1500-poly-bag.jpg", "stock": 5000, "description": "2 mil clear poly bag. Sold per unit, case of 1,000." },
+    { "id": 10, "model": "S-1620", "name": "Reclosable Zip Bag", "category": "bags", "subcategory": "Zip Bags", "price": 0.18, "image": "/products/s-1620-zip-bag.jpg", "stock": 3000, "description": "4 mil reclosable zip bag for parts and samples." },
+    { "id": 11, "model": "S-1800", "name": "Trash Liner", "category": "bags", "subcategory": "Trash Bags", "price": 0.22, "image": "/products/s-1800-trash-liner.jpg", "stock": 1200, "description": "1.5 mil low-density can liner, 33 gallon." },
+    { "id": 12, "model": "S-3001", "name": "Nitrile Gloves", "category": "safety", "subcategory": "Gloves", "price": 9.99, "image": "/products/s-3001-nitrile-gloves.jpg", "stock": 340, "description": "Powder-free nitrile gloves, box of 100." },
+    { "id": 13, "model": "S-3100", "name": "Safety Glasses", "category": "safety", "subcategory": "Glasses", "price": 3.49, "image": "/products/s-3100-safety-glasses.jpg", "stock": 500, "description": "Anti-fog safety glasses, ANSI Z87.1 rated." },
+    { "id": 14, "model": "S-3200", "name": "Hi-Vis Safety Vest", "category": "safety", "subcategory": "Vests", "price": 7.95, "image": "/products/s-3200-hi-vis-vest.jpg", "stock": 0, "description": "Class 2 high-visibility vest with reflective striping." },
+    { "id": 15, "model": "S-9000", "name": "Utility Cart", "category": "material-handling", "subcategory": "Carts", "price": 129.00, "image": "/products/s-9000-utility-cart.jpg", "stock": 35, "description": "Two-shelf plastic utility cart, 500 lb. capacity." },
+    { "id": 16, "model": "S-9100", "name": "Hand Truck", "category": "material-handling", "subcategory": "Hand Trucks", "price": 89.00, "image": "/products/s-9100-hand-truck.jpg", "stock": 60, "description": "Steel hand truck with 8 in. solid rubber wheels." },
+    { "id": 17, "model": "S-9200", "name": "Steel Shelving Unit", "category": "material-handling", "subcategory": "Shelving", "price": 159.00, "image": "/products/s-9200-shelving-unit.jpg", "stock": 18, "description": "5-shelf boltless steel shelving, 800 lb. per shelf." }
+  ],
+  "users": [
+    { "id": 1, "username": "buyer", "password": "supplies123", "name": "Riley Buyer" },
+    { "id": 2, "username": "admin", "password": "admin123", "name": "Sam Admin" }
+  ],
+  "orders": [
+    { "id": "ORD-1001", "customer": "Globex", "total": 150.0, "status": "Shipped" },
+    { "id": "ORD-1002", "customer": "Acme", "total": 320.5, "status": "Processing" },
+    { "id": "ORD-1003", "customer": "Initech", "total": 89.99, "status": "Delivered" },
+    { "id": "ORD-1004", "customer": "Umbrella", "total": 540.0, "status": "Shipped" },
+    { "id": "ORD-1005", "customer": "Stark", "total": 75.25, "status": "Processing" },
+    { "id": "ORD-1006", "customer": "Wayne", "total": 410.1, "status": "Delivered" },
+    { "id": "ORD-1007", "customer": "Hooli", "total": 220.0, "status": "Shipped" },
+    { "id": "ORD-1008", "customer": "Soylent", "total": 999.99, "status": "Processing" },
+    { "id": "ORD-1009", "customer": "Vandelay", "total": 45.0, "status": "Delivered" },
+    { "id": "ORD-1010", "customer": "Wonka", "total": 610.75, "status": "Shipped" },
+    { "id": "ORD-1011", "customer": "Cyberdyne", "total": 130.4, "status": "Processing" },
+    { "id": "ORD-1012", "customer": "Tyrell", "total": 280.2, "status": "Delivered" }
+  ]
+}

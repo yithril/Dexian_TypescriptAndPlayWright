@@ -1,0 +1,157 @@
+<h1>Quick Order</h1>
+<p class="qo-intro">Build an order fast: pick a category, choose a delivery date, search items, or upload a bulk list.</p>
+
+<!-- Cascading category -> subcategory ------------------------------------ -->
+<section class="qo-card" data-testid="cascading-form">
+  <h2>1. Narrow by category</h2>
+  <div class="qo-field">
+    <label for="qo-category">Category</label>
+    <select
+      id="qo-category"
+      data-testid="quick-order-category"
+      [value]="selectedCategory()"
+      (change)="onCategoryChange($any($event.target).value)"
+    >
+      <option value="">Select a category</option>
+      @for (cat of categories(); track cat.id) {
+        <option [value]="cat.slug">{{ cat.name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="qo-field">
+    <label for="qo-subcategory">Subcategory</label>
+    <select
+      id="qo-subcategory"
+      data-testid="quick-order-subcategory"
+      [disabled]="subcategories().length === 0"
+      [value]="selectedSubcategory()"
+      (change)="selectedSubcategory.set($any($event.target).value)"
+    >
+      <option value="">Select a subcategory</option>
+      @for (sub of subcategories(); track sub) {
+        <option [value]="sub">{{ sub }}</option>
+      }
+    </select>
+  </div>
+
+  @if (selectedSubcategory()) {
+    <p class="qo-confirm" data-testid="quick-order-selection">
+      {{ selectedCategory() }} / {{ selectedSubcategory() }}
+    </p>
+  }
+</section>
+
+<!-- Delivery date picker --------------------------------------------------- -->
+<section class="qo-card" data-testid="date-picker">
+  <h2>2. Delivery date</h2>
+  <div class="qo-field">
+    <label for="qo-date">Requested delivery</label>
+    <input
+      id="qo-date"
+      type="text"
+      readonly
+      placeholder="Pick a date"
+      [value]="selectedDate()"
+      (click)="toggleCalendar()"
+      data-testid="delivery-date-input"
+    />
+  </div>
+
+  @if (calendarOpen()) {
+    <div class="calendar" data-testid="calendar">
+      <div class="calendar__head">
+        <button type="button" (click)="previousMonth()" data-testid="calendar-prev" aria-label="Previous month">‹</button>
+        <span class="calendar__label" data-testid="calendar-month">{{ monthLabel() }}</span>
+        <button type="button" (click)="nextMonth()" data-testid="calendar-next" aria-label="Next month">›</button>
+      </div>
+      <div class="calendar__grid">
+        @for (d of calendarDays(); track d.iso) {
+          <button
+            type="button"
+            class="calendar__day"
+            (click)="pickDate(d.iso)"
+            [attr.data-testid]="'day-' + d.iso"
+          >
+            {{ d.day }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+</section>
+
+<!-- Product autocomplete --------------------------------------------------- -->
+<section class="qo-card" data-testid="autocomplete">
+  <h2>3. Find an item</h2>
+  <div class="qo-field qo-field--autocomplete">
+    <label for="qo-search">Search products</label>
+    <input
+      id="qo-search"
+      type="text"
+      autocomplete="off"
+      placeholder="Start typing a name or model #"
+      [value]="query()"
+      (input)="onQueryInput($any($event.target).value)"
+      role="combobox"
+      aria-controls="qo-suggestions"
+      [attr.aria-expanded]="suggestions().length > 0"
+      data-testid="product-autocomplete-input"
+    />
+    @if (suggestions().length > 0) {
+      <ul id="qo-suggestions" class="suggestions" role="listbox" data-testid="autocomplete-options">
+        @for (s of suggestions(); track s.id) {
+          <li
+            role="option"
+            class="suggestions__item"
+            (click)="chooseSuggestion(s)"
+            data-testid="autocomplete-option"
+          >
+            <strong>{{ s.model }}</strong> - {{ s.name }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+  @if (chosenProduct()) {
+    <p class="qo-confirm" data-testid="autocomplete-selection">{{ chosenProduct() }}</p>
+  }
+</section>
+
+<!-- Bulk upload + template download ---------------------------------------- -->
+<section class="qo-card" data-testid="bulk-upload">
+  <h2>4. Bulk order upload</h2>
+  <p class="qo-help">
+    Upload a CSV of <code>model,quantity</code> rows, or
+    <button type="button" class="linklike" (click)="downloadTemplate()" data-testid="download-template">
+      download the template
+    </button>.
+  </p>
+  <input
+    type="file"
+    accept=".csv,text/csv"
+    (change)="onFileSelected($event)"
+    data-testid="bulk-upload-input"
+  />
+
+  @if (uploadError()) {
+    <p class="qo-error" role="alert" data-testid="bulk-upload-error">{{ uploadError() }}</p>
+  }
+
+  @if (parsedRows().length > 0) {
+    <table class="parsed" data-testid="parsed-rows">
+      <thead>
+        <tr><th>Model</th><th>Quantity</th></tr>
+      </thead>
+      <tbody>
+        @for (row of parsedRows(); track $index) {
+          <tr data-testid="parsed-row">
+            <td>{{ row.model }}</td>
+            <td>{{ row.quantity }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="qo-confirm" data-testid="parsed-count">{{ parsedRows().length }} items parsed</p>
+  }
+</section>

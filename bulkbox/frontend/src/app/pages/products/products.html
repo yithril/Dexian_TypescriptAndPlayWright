@@ -1,0 +1,104 @@
+<div class="products">
+  <!-- CLEAN ZONE: we own this filter panel, so it has semantic labels + data-testid. -->
+  <aside class="filters" data-testid="filter-panel">
+    <h2 class="filters__title">Filters</h2>
+
+    <fieldset class="filters__group">
+      <legend>Category</legend>
+      <label class="radio">
+        <input
+          type="radio"
+          name="category"
+          value="all"
+          [checked]="category() === 'all'"
+          (change)="setCategory('all')"
+          data-testid="category-radio-all"
+        />
+        All categories
+      </label>
+      @for (cat of categories(); track cat.id) {
+        <label class="radio">
+          <input
+            type="radio"
+            name="category"
+            [value]="cat.slug"
+            [checked]="category() === cat.slug"
+            (change)="setCategory(cat.slug)"
+            [attr.data-testid]="'category-radio-' + cat.slug"
+          />
+          {{ cat.name }}
+        </label>
+      }
+    </fieldset>
+
+    <fieldset class="filters__group">
+      <legend>Availability</legend>
+      <label class="check">
+        <input
+          type="checkbox"
+          [checked]="inStockOnly()"
+          (change)="toggleStock($any($event.target).checked)"
+          data-testid="in-stock-only"
+        />
+        In stock only
+      </label>
+    </fieldset>
+
+    <fieldset class="filters__group">
+      <legend><label for="sort-select">Sort by</label></legend>
+      <select
+        id="sort-select"
+        class="select"
+        (change)="setSort($any($event.target).value)"
+        data-testid="sort-select"
+      >
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
+    </fieldset>
+  </aside>
+
+  <section class="results">
+    <div class="results__head">
+      <h1 data-testid="results-heading">
+        @if (search()) {
+          Results for "{{ search() }}"
+        } @else {
+          All products
+        }
+      </h1>
+      <div class="results__meta">
+        <span data-testid="results-count">{{ visibleProducts().length }}</span> products
+      </div>
+    </div>
+
+    @if (search()) {
+      <div class="chips" data-testid="active-filters">
+        <span class="chip" data-testid="search-chip">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="chip__text">{{ search() }}</span>
+          <button
+            type="button"
+            class="chip__remove"
+            (click)="clearSearch()"
+            data-testid="clear-search"
+            aria-label="Clear search"
+          >
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </span>
+      </div>
+    }
+
+    @if (loading()) {
+      <app-spinner label="Loading products..." />
+    } @else if (visibleProducts().length === 0) {
+      <p class="empty" data-testid="no-results">No products match your filters.</p>
+    }
+
+    @if (!loading()) {
+      <app-product-grid [products]="visibleProducts()" (add)="addToCart($event)" />
+    }
+  </section>
+</div>

@@ -1,0 +1,76 @@
+<h1>Checkout</h1>
+
+<div class="wizard" data-testid="checkout-wizard">
+  <ol class="steps" data-testid="step-indicator">
+    <li data-testid="step-1" [class.steps__item--active]="step() === 1"
+      [attr.aria-current]="step() === 1 ? 'step' : null">1. Shipping</li>
+    <li data-testid="step-2" [class.steps__item--active]="step() === 2"
+      [attr.aria-current]="step() === 2 ? 'step' : null">2. Payment</li>
+    <li data-testid="step-3" [class.steps__item--active]="step() === 3"
+      [attr.aria-current]="step() === 3 ? 'step' : null">3. Review</li>
+  </ol>
+
+  @if (error()) {
+    <p class="wizard__error" role="alert" data-testid="step-error">{{ error() }}</p>
+  }
+
+  @if (placed()) {
+    <p class="wizard__done" role="status" data-testid="order-confirmation">
+      Order placed! Thanks for shopping with BulkBox.
+    </p>
+  } @else {
+    @switch (step()) {
+      @case (1) {
+        <section class="wizard__panel" data-testid="step-shipping">
+          <h2>Shipping</h2>
+          <div class="field">
+            <label for="ship-name">Full name</label>
+            <input id="ship-name" type="text" [value]="name()"
+              (input)="name.set($any($event.target).value)" data-testid="shipping-name" />
+          </div>
+          <div class="field">
+            <label for="ship-addr">Address</label>
+            <input id="ship-addr" type="text" [value]="address()"
+              (input)="address.set($any($event.target).value)" data-testid="shipping-address" />
+          </div>
+        </section>
+      }
+      @case (2) {
+        <section class="wizard__panel" data-testid="step-payment">
+          <h2>Payment</h2>
+          <div class="field">
+            <label for="pay-name">Name on card</label>
+            <input id="pay-name" type="text" [value]="cardName()"
+              (input)="cardName.set($any($event.target).value)" data-testid="payment-name" />
+          </div>
+          <div class="field">
+            <label for="pay-num">Card number</label>
+            <input id="pay-num" type="text" [value]="cardNumber()"
+              (input)="cardNumber.set($any($event.target).value)" data-testid="payment-number" />
+          </div>
+        </section>
+      }
+      @case (3) {
+        <section class="wizard__panel" data-testid="step-review">
+          <h2>Review</h2>
+          <p>Ship to <strong data-testid="review-name">{{ name() }}</strong> - {{ address() }}</p>
+          <p>{{ cart.count() }} item(s), subtotal {{ cart.subtotal() | currency }}</p>
+        </section>
+      }
+    }
+
+    <div class="wizard__nav">
+      @if (step() > 1) {
+        <button type="button" class="btn btn--ghost" (click)="back()" data-testid="step-back">Back</button>
+      }
+      @if (step() < 3) {
+        <button type="button" class="btn btn--primary" (click)="next()" data-testid="step-next">Next</button>
+      }
+      @if (step() === 3) {
+        <button type="button" class="btn btn--primary" (click)="placeOrder()" data-testid="place-order">
+          Place order
+        </button>
+      }
+    </div>
+  }
+</div>

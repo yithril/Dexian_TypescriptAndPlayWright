@@ -1,0 +1,150 @@
+@if (product(); as product) {
+  <nav class="crumbs">
+    <a routerLink="/">Home</a> /
+    <a routerLink="/products">Products</a> /
+    <span>{{ product.name }}</span>
+  </nav>
+
+  <div class="detail" data-testid="product-detail">
+    <div class="detail__media">
+      <img [src]="product.image" [alt]="product.name" />
+    </div>
+
+    <div class="detail__info">
+      <h1 data-testid="product-name">{{ product.name }}</h1>
+      <div class="detail__model" data-testid="product-model">Model {{ product.model }}</div>
+
+      <app-stock-badge [stock]="product.stock" [showCount]="true" data-testid="stock-status" />
+
+      <p class="detail__desc">{{ product.description }}</p>
+
+      <div class="detail__price" data-testid="product-price">{{ product.price | currency }}</div>
+
+      <div class="qty">
+        <label class="qty__label" for="qty">Quantity</label>
+        <div class="qty__control">
+          <button type="button" class="qty__btn" (click)="decrement()" data-testid="qty-decrement"
+            aria-label="Decrease quantity">-</button>
+          <input
+            id="qty"
+            class="qty__input"
+            type="number"
+            min="1"
+            [value]="quantity()"
+            (input)="setQuantity($any($event.target).value)"
+            data-testid="qty-input"
+          />
+          <button type="button" class="qty__btn" (click)="increment()" data-testid="qty-increment"
+            aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <div class="detail__actions">
+        <button type="button" class="btn btn--primary" (click)="addToCart()" data-testid="add-to-cart">
+          <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+          Add to cart
+        </button>
+        @if (added()) {
+          <button type="button" class="btn btn--ghost" (click)="goToCart()" data-testid="view-cart">
+            View cart
+          </button>
+        }
+      </div>
+
+      @if (added()) {
+        <p class="detail__added" role="status" data-testid="added-confirmation">
+          Added to your cart.
+        </p>
+      }
+
+      <div class="tabs" data-testid="product-tabs">
+        <div class="tabs__list" role="tablist" aria-label="Product information">
+          <button
+            type="button" role="tab" class="tabs__tab"
+            [class.tabs__tab--active]="activeTab() === 'description'"
+            [attr.aria-selected]="activeTab() === 'description'"
+            (click)="setTab('description')" data-testid="tab-description"
+          >Description</button>
+          <button
+            type="button" role="tab" class="tabs__tab"
+            [class.tabs__tab--active]="activeTab() === 'specs'"
+            [attr.aria-selected]="activeTab() === 'specs'"
+            (click)="setTab('specs')" data-testid="tab-specs"
+          >Specifications</button>
+          <button
+            type="button" role="tab" class="tabs__tab"
+            [class.tabs__tab--active]="activeTab() === 'shipping'"
+            [attr.aria-selected]="activeTab() === 'shipping'"
+            (click)="setTab('shipping')" data-testid="tab-shipping"
+          >Shipping</button>
+        </div>
+
+        @switch (activeTab()) {
+          @case ('description') {
+            <div role="tabpanel" class="tabs__panel" data-testid="panel-description">
+              {{ product.description }}
+            </div>
+          }
+          @case ('specs') {
+            <ul role="tabpanel" class="tabs__panel" data-testid="panel-specs">
+              <li>Model: {{ product.model }}</li>
+              <li>Unit price: {{ product.price | currency }}</li>
+              <li>In stock: {{ product.stock }}</li>
+            </ul>
+          }
+          @case ('shipping') {
+            <div role="tabpanel" class="tabs__panel" data-testid="panel-shipping">
+              Ships in 1-2 business days from the nearest BulkBox warehouse.
+            </div>
+          }
+        }
+      </div>
+
+      <div class="accordion" data-testid="accordion">
+        <button
+          type="button" class="accordion__toggle"
+          (click)="toggleAccordion()"
+          [attr.aria-expanded]="accordionOpen()"
+          data-testid="accordion-toggle"
+        >
+          Bulk pricing &amp; volume discounts
+          <i class="fa-solid" [class.fa-chevron-down]="!accordionOpen()" [class.fa-chevron-up]="accordionOpen()" aria-hidden="true"></i>
+        </button>
+        @if (accordionOpen()) {
+          <div class="accordion__panel" data-testid="accordion-panel">
+            Save 10% on orders over 100 units. Contact sales for custom volume quotes.
+          </div>
+        }
+      </div>
+
+      <div class="resources">
+        <a
+          class="resources__link"
+          [href]="'/spec-sheet.html?model=' + product.model"
+          target="_blank"
+          rel="noopener"
+          data-testid="open-spec-sheet"
+        >
+          <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+          Open spec sheet
+        </a>
+
+        <div class="resources__widget">
+          <span class="resources__widget-label">Carrier estimate</span>
+          <iframe
+            class="resources__frame"
+            src="/widget.html"
+            title="Shipping estimator"
+            data-testid="spec-widget-frame"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <app-spinner label="Loading product..." />
+}
+
+@if (toast()) {
+  <div class="toast" role="status" data-testid="toast">{{ toast() }}</div>
+}

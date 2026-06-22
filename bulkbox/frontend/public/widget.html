@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shipping Estimator</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: #0f172a;
+        margin: 0;
+        padding: 1rem 1.25rem;
+        background: #f4f6f9;
+      }
+      h2 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+      button {
+        font: inherit;
+        padding: 0.45rem 0.9rem;
+        border: none;
+        border-radius: 6px;
+        background: #ffd21f;
+        cursor: pointer;
+      }
+      .result { font-weight: 700; margin-top: 0.75rem; }
+    </style>
+  </head>
+  <body>
+    <h2 data-testid="widget-heading">Shipping estimator</h2>
+    <p>Get a quick delivery estimate from our carrier partner.</p>
+    <button
+      type="button"
+      data-testid="widget-estimate"
+      onclick="document.querySelector('[data-testid=&quot;widget-result&quot;]').textContent = 'Arrives in 2-3 business days.'"
+    >
+      Estimate delivery
+    </button>
+    <p class="result" data-testid="widget-result"></p>
+  </body>
+</html>

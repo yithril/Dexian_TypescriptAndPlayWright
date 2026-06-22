@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spec Sheet - BulkBox</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: #0f172a;
+        padding: 2.5rem;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      h1 { margin-top: 0; }
+      ul { line-height: 1.8; }
+      .brand { color: #b8860b; font-weight: 700; letter-spacing: 0.04em; }
+    </style>
+  </head>
+  <body>
+    <p class="brand">BULKBOX</p>
+    <h1 data-testid="spec-sheet-title">Product Spec Sheet</h1>
+    <p>Model: <strong data-testid="spec-sheet-model">-</strong></p>
+    <ul>
+      <li>Material: industrial-grade corrugated fiberboard</li>
+      <li>Compliance: ISTA-6 transit tested</li>
+      <li>Edge crush test: 44 ECT</li>
+      <li>Warranty: 1 year limited</li>
+    </ul>
+    <script>
+      const model = new URLSearchParams(location.search).get('model');
+      if (model) {
+        document.querySelector('[data-testid="spec-sheet-model"]').textContent = model;
+      }
+    </script>
+  </body>
+</html>

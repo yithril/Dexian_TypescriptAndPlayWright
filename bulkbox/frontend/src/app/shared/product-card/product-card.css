@@ -1,0 +1,53 @@
+.pcard {
+  display: flex;
+  flex-direction: column;
+  background: var(--bb-white);
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  overflow: hidden;
+  height: 100%;
+}
+
+.pcard__media {
+  display: block;
+  background: #eef1f6;
+}
+
+.pcard__media img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.pcard__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem;
+}
+
+.pcard__name {
+  font-weight: 700;
+}
+
+.pcard__name:hover {
+  color: var(--bb-ink-soft);
+}
+
+.pcard__model {
+  font-size: 0.82rem;
+  color: var(--bb-ink-soft);
+}
+
+.pcard__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.pcard__price {
+  font-size: 1.15rem;
+  font-weight: 800;
+}

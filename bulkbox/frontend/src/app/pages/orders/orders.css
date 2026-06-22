@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  max-width: 720px;
+}
+
+.orders {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bb-white);
+  border: 1px solid var(--bb-line);
+  border-radius: var(--bb-radius);
+  overflow: hidden;
+}
+
+.orders th,
+.orders td {
+  text-align: left;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--bb-line);
+}
+
+.orders thead th {
+  background: var(--bb-bg, #f4f6f9);
+  padding: 0;
+}
+
+.orders__sort {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.7rem 0.85rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.orders__sort:hover {
+  color: var(--bb-yellow-dark);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.pager__label {
+  font-weight: 600;
+  color: var(--bb-ink-soft);
+}
+
+.pager button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

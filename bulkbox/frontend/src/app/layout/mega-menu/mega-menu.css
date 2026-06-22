@@ -1,0 +1,50 @@
+/* Intentionally messy mega-menu zone (no test ids, hashed class names). */
+.x7f2a_nav {
+  background: #111825;
+  border-top: 1px solid #2a3547;
+}
+
+.x7f2a_nav__toggle {
+  background: none;
+  border: none;
+  color: var(--bb-yellow);
+  font-weight: 700;
+  padding: 0.7rem 1.25rem;
+  cursor: pointer;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.x7f2a_nav__panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 1.5rem;
+}
+
+.x7f2a_col__head {
+  font-weight: 700;
+  color: var(--bb-yellow);
+  margin-bottom: 0.5rem;
+}
+
+.x7f2a_col__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.x7f2a_col__link {
+  color: #cdd5e2;
+  font-size: 0.9rem;
+}
+
+.x7f2a_col__link:hover {
+  color: var(--bb-white);
+  text-decoration: underline;
+}
