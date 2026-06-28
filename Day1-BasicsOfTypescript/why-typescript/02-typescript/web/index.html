@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PageTurner (TypeScript)</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>PageTurner</h1>
+  <span>Checkout &middot; TypeScript</span>
+</header>
+<main>
+  <div class="controls">
+    <button id="toggleExplain" class="secondary">Show the explainer</button>
+  </div>
+
+  <div class="card" id="cart"></div>
+
+  <section class="explainer" id="explainer">
+    <h2>Same change, caught before it could break</h2>
+    <p class="lead">The eBook was added. The receipt is correct. Here is what TypeScript did along the way.</p>
+
+    <div class="step-label">1 &middot; The data changed shape</div>
+    <div class="shapes">
+      <div class="shape">
+        <h3>Old shape &mdash; a physical book</h3>
+        <p class="why">When every book shipped in a box.</p>
+<pre>{
+  <span class="k">"format"</span>: <span class="s">"physical"</span>,
+  <span class="k">"id"</span>: <span class="s">"PT-1001"</span>,
+  <span class="k">"title"</span>: <span class="s">"The Silent Library"</span>,
+  <span class="k">"price"</span>: <span class="n">14.99</span>,
+<span class="keep-key">  <span class="k">"weightKg"</span>: <span class="n">0.45</span></span>
+}</pre>
+      </div>
+      <div class="shape">
+        <h3>New shape &mdash; an eBook</h3>
+        <p class="why">An eBook is a download &mdash; no weight, it has a file size.</p>
+<pre>{
+  <span class="k">"format"</span>: <span class="s">"ebook"</span>,
+  <span class="k">"id"</span>: <span class="s">"PT-3001"</span>,
+  <span class="k">"title"</span>: <span class="s">"Down the Foggy Road"</span>,
+  <span class="k">"price"</span>: <span class="n">7.99</span>,
+<span class="rem">  "weightKg": removed</span>
+<span class="add">  <span class="k">"fileSizeMb"</span>: <span class="n">3.2</span></span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="step-label">2 &middot; We wrote the contract down</div>
+    <div class="code-card">
+<pre><span class="t">interface</span> PhysicalBook { format: <span class="s">'physical'</span>; price: <span class="t">number</span>; weightKg: <span class="t">number</span>; }
+<span class="t">interface</span> EBook       { format: <span class="s">'ebook'</span>;    price: <span class="t">number</span>; fileSizeMb: <span class="t">number</span>; }
+
+<span class="t">type</span> Book = PhysicalBook | EBook;</pre>
+      <div class="annot">
+        <span class="pill">explicit</span>
+        <span>A <code>Book</code> is a physical book <strong>or</strong> an eBook. You cannot invent fields, and the ones that exist are guaranteed.</span>
+      </div>
+    </div>
+
+    <div class="step-label">3 &middot; The compiler forced us to handle the new case</div>
+    <div class="code-card">
+<pre>function shippingCost(book: Book): number {
+  switch (book.format) {
+    case <span class="s">'physical'</span>: return book.weightKg * 2.5;
+    <mark>case <span class="s">'ebook'</span>:    return 0;</mark>
+    default:
+      const _exhaustive: never = book;
+      return _exhaustive;
+  }
+}</pre>
+      <div class="annot">
+        <span class="pill" style="background:#fbe3e0;color:#c0392b;">forget a case?</span>
+        <span>Leave out <code>'ebook'</code> and the build stops with a precise message, pointing at the exact line:</span>
+      </div>
+      <div class="term">fulfillment.ts:6 - error <span class="err">TS2322</span>: Type 'EBook' is not assignable to type 'never'.</div>
+    </div>
+
+    <div class="step-label">4 &middot; So it reaches the screen correct</div>
+    <div class="chain">
+      <code>new eBook JSON</code>
+      <span class="arrow">&rarr;</span>
+      <code>typed as Book</code>
+      <span class="arrow">&rarr;</span>
+      <code>shippingCost handles 'ebook'</code>
+      <span class="arrow">&rarr;</span>
+      <code class="ok">shipping $0.00</code>
+      <span class="arrow">&rarr;</span>
+      <code class="ok">Order total $24.11</code>
+    </div>
+    <p class="lead" style="margin-top:16px;">Same backend change as the JavaScript version. This time the compiler walked us to every spot that needed updating &mdash; nothing reached the customer broken.</p>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

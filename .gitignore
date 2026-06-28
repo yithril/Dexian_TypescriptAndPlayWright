@@ -48,6 +48,7 @@ Desktop.ini
 # Instructor-only materials (NOT for students)
 TEACHING_PLAN.md
 PAGETURNER_CODEALONG.md
+INSTRUCTOR_NOTES.md
 
 # One-off tooling (remove after the images are fetched)
 bulkbox/scripts/

@@ -1,0 +1,17 @@
+{
+  "name": "why-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Day 1 presenter demo: the 'why' of TypeScript, shown through software evolution.",
+  "scripts": {
+    "js": "node 01-vanilla-js/checkout.js",
+    "ts": "ts-node 02-typescript/checkout.ts",
+    "typecheck": "tsc --noEmit",
+    "build:web": "tsc 02-typescript/web/app.ts --ignoreConfig --target ES2017 --lib DOM,ES2017 --strict --outDir 02-typescript/web"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}

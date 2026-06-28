@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PageTurner</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>PageTurner</h1>
+  <span>Checkout</span>
+</header>
+<main>
+  <div class="controls">
+    <button id="addEbook">Add eBook (new requirement)</button>
+    <button id="reset" class="secondary">Reset</button>
+    <button id="toggleExplain" class="secondary">Show the explainer</button>
+  </div>
+
+  <div class="card" id="cart"></div>
+
+  <section class="explainer" id="explainer">
+    <h2>Why the receipt broke</h2>
+    <p class="lead">Nobody wrote a bug. The shape of a "book" changed, and the old code never knew.</p>
+
+    <div class="step-label">1 &middot; The data changed shape</div>
+    <div class="shapes">
+      <div class="shape">
+        <h3>Old shape &mdash; a physical book</h3>
+        <p class="why">When every book shipped in a box.</p>
+<pre>{
+  <span class="k">"format"</span>: <span class="s">"physical"</span>,
+  <span class="k">"id"</span>: <span class="s">"PT-1001"</span>,
+  <span class="k">"title"</span>: <span class="s">"The Silent Library"</span>,
+  <span class="k">"price"</span>: <span class="n">14.99</span>,
+<span class="keep-key">  <span class="k">"weightKg"</span>: <span class="n">0.45</span></span>
+}</pre>
+      </div>
+      <div class="shape">
+        <h3>New shape &mdash; an eBook</h3>
+        <p class="why">An eBook is a download &mdash; no weight, it has a file size.</p>
+<pre>{
+  <span class="k">"format"</span>: <span class="s">"ebook"</span>,
+  <span class="k">"id"</span>: <span class="s">"PT-3001"</span>,
+  <span class="k">"title"</span>: <span class="s">"Down the Foggy Road"</span>,
+  <span class="k">"price"</span>: <span class="n">7.99</span>,
+<span class="rem">  "weightKg": removed</span>
+<span class="add">  <span class="k">"fileSizeMb"</span>: <span class="n">3.2</span></span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="step-label">2 &middot; Where the old code lands on it</div>
+    <div class="code-card">
+<pre>function shippingCost(book) {
+  return book.<mark>weightKg</mark> * 2.5;
+}</pre>
+      <div class="annot">
+        <span class="pill">physical</span>
+        <span><code>book.weightKg</code> is <strong>0.45</strong> &rarr; <code>0.45 * 2.5</code> = <strong>1.13</strong> &#10003;</span>
+      </div>
+      <div class="annot">
+        <span class="pill" style="background:#fbe3e0;color:#c0392b;">eBook</span>
+        <span><code>book.weightKg</code> is <strong>undefined</strong> &rarr; <code>undefined * 2.5</code> = <span class="bad">NaN</span> &#10007;</span>
+      </div>
+    </div>
+
+    <div class="step-label">3 &middot; And it flows straight to the screen</div>
+    <div class="chain">
+      <code>new eBook JSON</code>
+      <span class="arrow">&rarr;</span>
+      <code>shippingCost(book)</code>
+      <span class="arrow">&rarr;</span>
+      <code class="fail">NaN</code>
+      <span class="arrow">&rarr;</span>
+      <code class="fail">Order total $NaN</code>
+    </div>
+    <p class="lead" style="margin-top:16px;">JavaScript never flagged it. It ran the broken cart and rendered it. That is the landmine.</p>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
