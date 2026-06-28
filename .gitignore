@@ -1,7 +1,11 @@
-# Dependencies / build output
+# Dependencies
 node_modules/
+
+# Build output
 dist/
+out-tsc/
 .angular/
+*.tsbuildinfo
 
 # Playwright artifacts
 test-results/
@@ -9,19 +13,41 @@ playwright-report/
 playwright/.cache/
 blob-report/
 
+# Test / coverage
+coverage/
+
 # Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temp files
+tmp/
+*.tmp
+
+# Editor / IDE
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # Local secrets - never commit
 *.key
 .env
 .env.local
+.env.*.local
 
 # Office temp lock files
 ~$*
 
 # Instructor-only materials (NOT for students)
 TEACHING_PLAN.md
+PAGETURNER_CODEALONG.md
 
 # One-off tooling (remove after the images are fetched)
 bulkbox/scripts/
