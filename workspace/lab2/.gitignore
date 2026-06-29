@@ -1,0 +1,7 @@
+node_modules/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Saved authentication state created during the Day 3 storageState task.
+auth.json

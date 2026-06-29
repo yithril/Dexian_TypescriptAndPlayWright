@@ -1,0 +1,18 @@
+{
+  "name": "bulkbox-lab",
+  "version": "1.0.0",
+  "description": "Independent Playwright lab (Day 2 + Day 3) that runs against the BulkBox sample app.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report",
+    "start:app": "npm --prefix ../../bulkbox start"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^26.0.0"
+  }
+}

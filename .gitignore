@@ -50,5 +50,12 @@ TEACHING_PLAN.md
 PAGETURNER_CODEALONG.md
 INSTRUCTOR_NOTES.md
 
+# Whole instructor-notes folder is private (answer keys, run-of-show, etc.)
+teachers_notes/
+
+# Lab answer key - kept OUT of git for now. To publish it later, delete this
+# line, then `git add lab2-solution` and commit (its history starts only then).
+/lab2-solution/
+
 # One-off tooling (remove after the images are fetched)
 bulkbox/scripts/
