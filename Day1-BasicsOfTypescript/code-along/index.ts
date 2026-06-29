@@ -1,5 +1,7 @@
 //String boolean null undefined number symbol bigint 
 
+import type { Mountain } from "./mountain";
+
 //Declare some variables
 
 let myName:string = "Jonathan Hop";
@@ -72,4 +74,8 @@ interface Job {
 let newJob:Job = {
     title: "Software Engineer",
     location: JobType.Remote
+}
+
+let mountain:Mountain = {
+    name: "Mount Everest"
 }
