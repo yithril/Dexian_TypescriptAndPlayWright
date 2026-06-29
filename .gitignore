@@ -59,3 +59,9 @@ teachers_notes/
 
 # One-off tooling (remove after the images are fetched)
 bulkbox/scripts/
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
