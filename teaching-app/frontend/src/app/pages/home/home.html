@@ -6,7 +6,10 @@
       Hand-picked fiction, mysteries, sci-fi, cookbooks and stories for little readers - with
       next-day dispatch.
     </p>
-    <a class="btn btn--primary" routerLink="/catalog" data-testid="browse-books">Browse the catalog</a>
+    <a class="btn btn--primary" routerLink="/catalog" data-testid="browse-books">
+      Browse the catalog
+      <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
   </div>
   <div class="banner__art" aria-hidden="true">
     <span class="cover banner__cover">PT</span>
@@ -16,15 +19,17 @@
 </section>
 
 <section class="shelf">
-  <h2>Browse by genre</h2>
+  <h2 class="section-title"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>Browse by genre</h2>
   <div class="genre-tiles" data-testid="genre-tiles">
     @for (genre of genres(); track genre.id) {
       <a
-        class="genre-tile"
+        class="genre-tile lift"
+        [class]="'genre-tile--' + genre.slug"
         routerLink="/catalog"
         [queryParams]="{ genre: genre.slug }"
         [attr.data-testid]="'genre-tile-' + genre.slug"
       >
+        <span class="genre-tile__icon" aria-hidden="true"><i class="fa-solid" [class]="genreIcon(genre.slug)"></i></span>
         <span class="genre-tile__name">{{ genre.name }}</span>
         <span class="genre-tile__tag">{{ genre.tagline }}</span>
       </a>
@@ -33,18 +38,29 @@
 </section>
 
 <section class="shelf">
-  <h2>Featured this week</h2>
+  <h2 class="section-title"><i class="fa-solid fa-star" aria-hidden="true"></i>Featured this week</h2>
   <div class="featured" data-testid="featured-shelf">
     @for (book of featured(); track book.id) {
-      <article class="bcard" [attr.data-testid]="'featured-card-' + book.id">
+      <article class="bcard lift" [attr.data-testid]="'featured-card-' + book.id">
         <a [routerLink]="['/catalog', book.id]" class="bcard__cover-link">
-          <span class="cover bcard__cover">{{ initials(book.title) }}</span>
+          <span class="cover bcard__cover" [class]="'cover--' + book.genre">{{ initials(book.title) }}</span>
+          <span class="bcard__badge" aria-hidden="true"><i class="fa-solid fa-star"></i> Featured</span>
         </a>
         <a class="bcard__title" [routerLink]="['/catalog', book.id]">{{ book.title }}</a>
         <div class="bcard__author">{{ book.author }}</div>
+        <div class="bcard__stars" aria-hidden="true">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-regular fa-star"></i>
+        </div>
         <div class="bcard__row">
           <span class="bcard__price">{{ book.price | currency }}</span>
-          <button type="button" class="btn btn--ghost bcard__btn" (click)="addToBasket(book)">Add</button>
+          <button type="button" class="btn btn--ghost bcard__btn" (click)="addToBasket(book)">
+            <i class="fa-solid fa-cart-plus" aria-hidden="true"></i>
+            Add
+          </button>
         </div>
       </article>
     }

@@ -1,7 +1,11 @@
 <header class="masthead">
+  <div class="masthead__promo" aria-hidden="true">
+    <i class="fa-solid fa-truck-fast"></i>
+    Free next-day dispatch on every order
+  </div>
   <div class="masthead__bar">
     <a class="logo" routerLink="/" data-testid="logo-link">
-      <span class="logo__mark">&#9783;</span>
+      <span class="logo__mark"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
       <span class="logo__name">PageTurner</span>
     </a>
 
@@ -17,7 +21,10 @@
         (input)="query.set($any($event.target).value)"
         data-testid="search-field"
       />
-      <button type="submit" class="finder__go btn btn--primary" data-testid="search-go">Search</button>
+      <button type="submit" class="finder__go btn btn--primary" data-testid="search-go">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        Search
+      </button>
     </form>
 
     <nav class="account-nav" aria-label="Account">
@@ -26,13 +33,17 @@
           Welcome, {{ account.member()?.name }}
         </span>
         <button type="button" class="account-nav__btn" (click)="signOut()" data-testid="signout-btn">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
           Sign out
         </button>
       } @else {
-        <a class="account-nav__btn" routerLink="/signin" data-testid="account-link">Sign in</a>
+        <a class="account-nav__btn" routerLink="/signin" data-testid="account-link">
+          <i class="fa-regular fa-user" aria-hidden="true"></i>
+          Sign in
+        </a>
       }
       <a class="basket-link" routerLink="/basket" data-testid="basket-link" aria-label="Basket">
-        <span class="basket-link__icon" aria-hidden="true">&#128717;</span>
+        <span class="basket-link__icon" aria-hidden="true"><i class="fa-solid fa-basket-shopping"></i></span>
         Basket
         <span class="basket-link__badge" data-testid="basket-count">{{ basket.count() }}</span>
       </a>

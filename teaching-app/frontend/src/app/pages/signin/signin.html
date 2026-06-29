@@ -1,5 +1,6 @@
 <div class="signin">
   <div class="signin__card">
+    <i class="fa-solid fa-right-to-bracket signin__icon" aria-hidden="true"></i>
     <h1>Sign in to PageTurner</h1>
     <p class="signin__hint">Demo account: <strong>reader</strong> / <strong>books123</strong></p>
 
@@ -9,7 +10,7 @@
       }
 
       <div class="field">
-        <label for="username">Username</label>
+        <label for="username"><i class="fa-solid fa-user icon-muted" aria-hidden="true"></i> Username</label>
         <input
           id="username"
           name="username"
@@ -26,7 +27,7 @@
       </div>
 
       <div class="field">
-        <label for="password">Password</label>
+        <label for="password"><i class="fa-solid fa-key icon-muted" aria-hidden="true"></i> Password</label>
         <input
           id="password"
           name="password"
@@ -43,6 +44,7 @@
       </div>
 
       <button type="submit" class="btn btn--primary signin__submit" [disabled]="pending()" data-testid="signin-btn">
+        <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
         {{ pending() ? 'Signing in...' : 'Sign in' }}
       </button>
     </form>

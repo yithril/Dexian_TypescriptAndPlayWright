@@ -2,11 +2,13 @@
 
 @if (placed()) {
   <div class="basket-done" role="status" data-testid="order-confirm">
+    <i class="fa-solid fa-circle-check basket-done__icon" aria-hidden="true"></i>
     <p>Thanks for your order! Your books are on the way.</p>
     <a class="btn btn--primary" routerLink="/catalog">Keep browsing</a>
   </div>
 } @else if (basket.items().length === 0) {
   <div class="basket-empty" data-testid="basket-empty">
+    <i class="fa-solid fa-basket-shopping basket-empty__icon" aria-hidden="true"></i>
     <p>Your basket is empty.</p>
     <a class="btn btn--primary" routerLink="/catalog">Browse the catalog</a>
   </div>
@@ -41,15 +43,15 @@
             (click)="remove(line.book.id)"
             [attr.data-testid]="'item-remove-' + line.book.id"
             aria-label="Remove item"
-          >Remove</button>
+          ><i class="fa-solid fa-trash" aria-hidden="true"></i> Remove</button>
         </li>
       }
     </ul>
 
     <aside class="recap" data-testid="basket-summary">
-      <h2>Order summary</h2>
+      <h2 class="section-title"><i class="fa-solid fa-receipt" aria-hidden="true"></i>Order summary</h2>
       <div class="recap__row">
-        <span>Items</span>
+        <span><i class="fa-solid fa-book icon-muted" aria-hidden="true"></i> Items</span>
         <span data-testid="basket-item-count">{{ basket.count() }}</span>
       </div>
       <div class="recap__row recap__row--total">
@@ -57,6 +59,7 @@
         <span data-testid="basket-subtotal">{{ basket.subtotal() | currency }}</span>
       </div>
       <button type="button" class="btn btn--primary recap__checkout" (click)="placeOrder()" data-testid="checkout-button">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
         Place order
       </button>
     </aside>

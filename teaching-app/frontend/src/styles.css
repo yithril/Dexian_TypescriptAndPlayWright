@@ -9,11 +9,39 @@
   --pt-line: #ddd2bd;
   --pt-white: #fffdf8;
   --pt-shadow: 0 6px 18px rgba(43, 38, 32, 0.12);
+  --pt-shadow-lift: 0 12px 28px rgba(43, 38, 32, 0.18);
   --pt-radius: 10px;
+
+  /* Per-genre accents (keyed off catalog slugs). */
+  --pt-genre-fiction: #2f6f4f;
+  --pt-genre-mystery: #4a4034;
+  --pt-genre-scifi: #3a5a8c;
+  --pt-genre-children: #c2603a;
+  --pt-genre-cooking: #b4532a;
 }
 
 * {
   box-sizing: border-box;
+}
+
+::selection {
+  background: var(--pt-forest);
+  color: var(--pt-white);
+}
+
+* {
+  scrollbar-color: var(--pt-line) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--pt-line);
+  border-radius: 999px;
+  border: 3px solid var(--pt-paper);
 }
 
 html,
@@ -32,7 +60,7 @@ body {
 h1,
 h2,
 h3 {
-  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-family: 'Fraunces', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
   color: var(--pt-ink);
   margin-top: 0;
   letter-spacing: 0.01em;
@@ -41,6 +69,28 @@ h3 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pt-forest);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Icon helpers */
+.icon-muted {
+  color: var(--pt-ink-soft);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.section-title > i {
+  color: var(--pt-clay);
+  font-size: 0.9em;
 }
 
 .btn {
@@ -88,7 +138,9 @@ a {
 }
 
 .pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -135,4 +187,37 @@ a {
 
 .cover--ink {
   background: linear-gradient(135deg, #4a4034, var(--pt-ink));
+}
+
+/* Per-genre cover accents (driven by coverClass(book.genre)). */
+.cover--fiction {
+  background: linear-gradient(135deg, var(--pt-forest), var(--pt-forest-deep));
+}
+
+.cover--mystery {
+  background: linear-gradient(135deg, #5d5142, var(--pt-genre-mystery));
+}
+
+.cover--scifi {
+  background: linear-gradient(135deg, #527bb8, var(--pt-genre-scifi));
+}
+
+.cover--children {
+  background: linear-gradient(135deg, #d6794f, var(--pt-genre-children));
+}
+
+.cover--cooking {
+  background: linear-gradient(135deg, #c2603a, var(--pt-genre-cooking));
+}
+
+/* Shared hover lift for cards and rows. */
+.lift {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--pt-shadow-lift);
+  }
 }

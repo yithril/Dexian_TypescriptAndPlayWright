@@ -64,6 +64,30 @@
   transform: rotate(9deg);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .banner__cover {
+    animation: cover-float 6s ease-in-out infinite;
+  }
+
+  .banner__cover--2 {
+    animation-delay: -2s;
+  }
+
+  .banner__cover--3 {
+    animation-delay: -4s;
+  }
+
+  @keyframes cover-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -10px;
+    }
+  }
+}
+
 .shelf {
   margin-bottom: 2.5rem;
 }
@@ -92,13 +116,46 @@
   transition: transform 0.1s ease, box-shadow 0.15s ease;
 }
 
-.genre-tile:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--pt-shadow);
+.genre-tile__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  margin-bottom: 0.35rem;
+  background: var(--pt-paper-deep);
+  color: var(--pt-forest-deep);
+  font-size: 1.05rem;
+}
+
+.genre-tile--fiction .genre-tile__icon {
+  background: #e4f1e8;
+  color: var(--pt-genre-fiction);
+}
+
+.genre-tile--mystery .genre-tile__icon {
+  background: #ece7df;
+  color: var(--pt-genre-mystery);
+}
+
+.genre-tile--scifi .genre-tile__icon {
+  background: #e2e9f4;
+  color: var(--pt-genre-scifi);
+}
+
+.genre-tile--children .genre-tile__icon {
+  background: #f6e2d8;
+  color: var(--pt-genre-children);
+}
+
+.genre-tile--cooking .genre-tile__icon {
+  background: #f6e2d8;
+  color: var(--pt-genre-cooking);
 }
 
 .genre-tile__name {
-  font-family: Georgia, serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--pt-forest-deep);
@@ -125,6 +182,11 @@
   padding: 1rem;
 }
 
+.bcard__cover-link {
+  position: relative;
+  display: block;
+}
+
 .bcard__cover {
   width: 100%;
   height: 150px;
@@ -133,8 +195,31 @@
   align-items: center;
 }
 
+.bcard__badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--pt-clay);
+  color: var(--pt-white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.bcard__stars {
+  color: #d9a441;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
 .bcard__title {
-  font-family: Georgia, serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-weight: 700;
   color: var(--pt-ink);
 }

@@ -19,6 +19,18 @@
   border-style: solid;
 }
 
+.basket-empty__icon,
+.basket-done__icon {
+  display: block;
+  font-size: 2.6rem;
+  margin-bottom: 0.85rem;
+  color: var(--pt-line);
+}
+
+.basket-done__icon {
+  color: var(--pt-forest);
+}
+
 .basket__lines {
   list-style: none;
   margin: 0;
@@ -40,7 +52,7 @@
 }
 
 .bline__title {
-  font-family: Georgia, serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-weight: 700;
   font-size: 1.05rem;
 }

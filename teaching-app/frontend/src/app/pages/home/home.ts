@@ -32,6 +32,18 @@ export class Home {
       .slice(0, 4)
   );
 
+  private readonly genreIcons: Record<string, string> = {
+    fiction: 'fa-book',
+    mystery: 'fa-mask',
+    scifi: 'fa-rocket',
+    children: 'fa-child-reaching',
+    cooking: 'fa-utensils'
+  };
+
+  genreIcon(slug: string): string {
+    return this.genreIcons[slug] ?? 'fa-book';
+  }
+
   initials(title: string): string {
     return title
       .split(/\s+/)

@@ -1,9 +1,12 @@
 <div class="catalog">
   <aside class="refine" data-testid="refine-panel">
-    <h2 class="refine__title">Refine</h2>
+    <div class="refine__heading">
+      <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+      <h2 class="refine__title">Refine</h2>
+    </div>
 
     <fieldset class="refine__group">
-      <legend>Genre</legend>
+      <legend><i class="fa-solid fa-tags icon-muted" aria-hidden="true"></i> Genre</legend>
       <label class="opt">
         <input
           type="radio"
@@ -31,7 +34,7 @@
     </fieldset>
 
     <fieldset class="refine__group">
-      <legend>Availability</legend>
+      <legend><i class="fa-solid fa-box icon-muted" aria-hidden="true"></i> Availability</legend>
       <label class="opt">
         <input
           type="checkbox"
@@ -44,7 +47,7 @@
     </fieldset>
 
     <fieldset class="refine__group">
-      <legend><label for="order-by">Sort by</label></legend>
+      <legend><i class="fa-solid fa-arrow-down-wide-short icon-muted" aria-hidden="true"></i> <label for="order-by">Sort by</label></legend>
       <select
         id="order-by"
         class="refine__select"
@@ -89,9 +92,24 @@
     }
 
     @if (loading()) {
+      <div class="skeleton" aria-hidden="true">
+        @for (n of [1, 2, 3, 4]; track n) {
+          <div class="skeleton__row">
+            <div class="skeleton__art"></div>
+            <div class="skeleton__lines">
+              <span class="skeleton__line skeleton__line--lg"></span>
+              <span class="skeleton__line"></span>
+              <span class="skeleton__line skeleton__line--sm"></span>
+            </div>
+          </div>
+        }
+      </div>
       <p class="listing__loading" data-testid="loading">Loading books...</p>
     } @else if (visibleBooks().length === 0) {
-      <p class="listing__empty" data-testid="empty-state">No books match your filters.</p>
+      <div class="listing__empty" data-testid="empty-state">
+        <i class="fa-solid fa-magnifying-glass-minus" aria-hidden="true"></i>
+        <p>No books match your filters.</p>
+      </div>
     }
 
     @if (!loading()) {

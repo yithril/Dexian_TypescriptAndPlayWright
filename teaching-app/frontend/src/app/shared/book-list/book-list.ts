@@ -22,9 +22,15 @@ export class BookList {
       .toUpperCase();
   }
 
+  private readonly genreCovers: Record<string, string> = {
+    fiction: 'cover--fiction',
+    mystery: 'cover--mystery',
+    scifi: 'cover--scifi',
+    children: 'cover--children',
+    cooking: 'cover--cooking'
+  };
+
   coverClass(genre: string): string {
-    if (genre === 'mystery' || genre === 'scifi') return 'cover--ink';
-    if (genre === 'cooking' || genre === 'children') return 'cover--clay';
-    return '';
+    return this.genreCovers[genre] ?? '';
   }
 }
