@@ -1,0 +1,26 @@
+{
+  "name": "dexian_typescriptandplaywright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yithril/Dexian_TypescriptAndPlayWright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yithril/Dexian_TypescriptAndPlayWright/issues"
+  },
+  "homepage": "https://github.com/yithril/Dexian_TypescriptAndPlayWright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
