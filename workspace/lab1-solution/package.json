@@ -1,0 +1,15 @@
+{
+  "name": "typescript-lab-solution",
+  "version": "1.0.0",
+  "description": "Reference solution for the Day 1 TypeScript practice lab.",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
