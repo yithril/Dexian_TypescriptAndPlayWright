@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scenario 2 - destroy &amp; re-create</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Scenario 2 - destroy &amp; re-create</h1>
+  <p class="lede">
+    <strong>Destroy</strong> removes the widget node from the DOM.
+    <strong>Re-create</strong> appends a brand-new node (after a short delay).
+    One locator handles the whole cycle - no re-targeting.
+  </p>
+
+  <div class="card">
+    <p class="status" id="status">&nbsp;</p>
+    <div class="target" id="target">
+      <div data-testid="widget" id="widget" class="pill" style="font-size:1rem;padding:.5rem 1rem;">Live widget</div>
+    </div>
+    <p>
+      <button class="action secondary" id="destroy">Destroy</button>
+      <button class="action" id="recreate">Re-create</button>
+    </p>
+  </div>
+
+  <a class="back" href="index.html">Back to menu</a>
+
+  <script>
+    const target = document.getElementById('target');
+    const status = document.getElementById('status');
+
+    const makeWidget = () => {
+      const el = document.createElement('div');
+      el.setAttribute('data-testid', 'widget');
+      el.id = 'widget';
+      el.className = 'pill';
+      el.style.cssText = 'font-size:1rem;padding:.5rem 1rem;';
+      el.textContent = 'Live widget';
+      return el;
+    };
+
+    document.getElementById('destroy').addEventListener('click', () => {
+      const w = document.getElementById('widget');
+      if (w) w.remove();
+      status.textContent = 'Widget destroyed (removed from the DOM).';
+    });
+
+    document.getElementById('recreate').addEventListener('click', () => {
+      if (document.getElementById('widget')) return; // already present
+      const delay = Math.round(300 + Math.random() * 1500); // 0.3s - 1.8s
+      const start = Date.now();
+
+      const tick = () => {
+        const remaining = Math.max(0, delay - (Date.now() - start));
+        if (remaining > 0 && !document.getElementById('widget')) {
+          status.textContent = `Re-creating in ${(remaining / 1000).toFixed(1)}s...`;
+          requestAnimationFrame(tick);
+        }
+      };
+      tick();
+
+      setTimeout(() => {
+        target.appendChild(makeWidget());
+        status.textContent = 'A brand-new widget node was added to the DOM.';
+      }, delay);
+    });
+  </script>
+</body>
+</html>

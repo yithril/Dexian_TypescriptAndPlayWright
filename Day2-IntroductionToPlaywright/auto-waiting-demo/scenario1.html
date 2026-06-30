@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scenario 1 - appears late</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Scenario 1 - appears late</h1>
+  <p class="lede">
+    The <code>Claim reward</code> button does <strong>not</strong> exist when the page loads.
+    It is created and appended to the DOM after a random delay.
+    <span class="pill">tip: add ?delay=8000 to the URL to force a long wait</span>
+  </p>
+
+  <div class="card">
+    <p class="status" id="status">Loading...</p>
+    <div class="target" id="target"></div>
+  </div>
+
+  <a class="back" href="index.html">Back to menu</a>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const override = Number(params.get('delay'));
+    const delay = Number.isFinite(override) && override > 0
+      ? override
+      : Math.round(500 + Math.random() * 4000); // 0.5s - 4.5s, under the 5s default timeout
+
+    const status = document.getElementById('status');
+    const target = document.getElementById('target');
+    const start = Date.now();
+
+    const tick = () => {
+      const remaining = Math.max(0, delay - (Date.now() - start));
+      if (remaining > 0) {
+        status.textContent = `"Claim reward" button appears in ${(remaining / 1000).toFixed(1)}s...`;
+        requestAnimationFrame(tick);
+      }
+    };
+    tick();
+
+    setTimeout(() => {
+      const btn = document.createElement('button');
+      btn.className = 'action';
+      btn.textContent = 'Claim reward';
+      btn.addEventListener('click', () => { btn.textContent = 'Claimed!'; });
+      target.appendChild(btn);
+      status.textContent = `Here! (appeared after ${(delay / 1000).toFixed(1)}s)`;
+    }, delay);
+  </script>
+</body>
+</html>

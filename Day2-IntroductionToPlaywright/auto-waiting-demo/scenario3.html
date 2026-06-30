@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scenario 3 - becomes clickable</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Scenario 3 - becomes clickable</h1>
+  <p class="lede">
+    The <code>Submit</code> button starts <strong>disabled</strong> and becomes enabled after a
+    random delay. <code>click()</code> waits for the element to be actionable before acting.
+    <span class="pill">tip: add ?delay=8000 to the URL to force a long wait</span>
+  </p>
+
+  <div class="card">
+    <p class="status" id="status">Loading...</p>
+    <div class="target">
+      <button class="action" id="submit" disabled>Submit</button>
+      <span id="result"></span>
+    </div>
+  </div>
+
+  <a class="back" href="index.html">Back to menu</a>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const override = Number(params.get('delay'));
+    const delay = Number.isFinite(override) && override > 0
+      ? override
+      : Math.round(500 + Math.random() * 4000); // 0.5s - 4.5s
+
+    const status = document.getElementById('status');
+    const submit = document.getElementById('submit');
+    const result = document.getElementById('result');
+
+    submit.addEventListener('click', () => { result.textContent = 'Submitted!'; });
+
+    const start = Date.now();
+    const tick = () => {
+      const remaining = Math.max(0, delay - (Date.now() - start));
+      if (remaining > 0) {
+        status.textContent = `Submit enables in ${(remaining / 1000).toFixed(1)}s...`;
+        requestAnimationFrame(tick);
+      }
+    };
+    tick();
+
+    setTimeout(() => {
+      submit.disabled = false;
+      status.textContent = `Enabled (after ${(delay / 1000).toFixed(1)}s) - now click it.`;
+    }, delay);
+  </script>
+</body>
+</html>
