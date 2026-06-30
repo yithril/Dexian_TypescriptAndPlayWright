@@ -4,6 +4,7 @@ interface Mountain {
   height: number;
 }
 
+
 const mountains: Mountain[] = [
   { name: "Kilimanjaro", height: 19341 },
   { name: "Everest", height: 29029 },

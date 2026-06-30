@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Reference solution for the Day 1 TypeScript practice lab.",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "node --loader ts-node/esm src/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
