@@ -1,11 +1,3 @@
-// Day 1 TypeScript Lab - reference solution (all four parts in one file).
-//
-// Run it with:
-//   npm start                 (or)   npx ts-node src/index.ts
-//
-// Every function is an arrow function, matching the style used throughout the
-// Playwright portion of the workshop.
-
 // ── Part 1: Tallest Mountain ──────────────────────────────────────────────
 interface Mountain {
   name: string;
@@ -88,12 +80,7 @@ const students: Student[] = [
 
 const printStudentReport = (students: Student[]): void => {
   students.forEach((student) => {
-    if (typeof student.grade === "number") {
-      console.log(`${student.name}: ${student.grade}`);
-    } else {
-      // Here TypeScript has narrowed grade to the literal "incomplete".
-      console.log(`${student.name}: ${student.grade}`);
-    }
+    console.log(`${student.name}: ${student.grade}`);
   });
 };
 
