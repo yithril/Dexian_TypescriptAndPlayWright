@@ -19,11 +19,17 @@ binaries. So there is no `npx playwright install` step.
 #   bash/zsh:    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install
 npm install
 
-npm test            # run all three scenarios headless
+npm test            # run everything headless (scenario 4 has 1 deliberate failure)
 npm run test:headed # watch the browser do it
 npm run test:ui     # interactive UI mode - great for narrating live
 npm run report      # open the last HTML report
 ```
+
+> Heads up: a full `npm test` reports **one failing test** by design - the broken
+> pattern in `scenario4.spec.ts`. To run only the always-green scenarios use
+> `npx playwright test auto-wait.spec.ts`; to demo the failure use
+> `npx playwright test scenario4`. (Filter by the file name, not just `auto-wait` -
+> the folder `auto-waiting-demo` contains that substring, so it would match everything.)
 
 The project is configured for `channel: 'chrome'` (Google Chrome) in
 `playwright.config.ts`. If a machine has Edge instead, change that one line to
@@ -39,6 +45,7 @@ by hand while you talk.
 | 1. Appears late | `scenario1.html` | The target button is not in the DOM at load; it is injected after a random delay. The assertion `toBeVisible()` auto-waits - no `WebDriverWait`. The test even defines the locator *before* navigating, proving it is just a recipe. |
 | 2. Destroy & re-create | `scenario2.html` | Destroy removes the node; Re-create appends a brand-new node. The *same* locator variable re-resolves it. In Selenium the old reference would throw `StaleElementReferenceException`. |
 | 3. Becomes clickable | `scenario3.html` | The Submit button starts disabled and enables after a delay. `click()` auto-waits for actionability (enabled/visible/stable), so there is no "wait until clickable" step. |
+| 4. await inside expect | `scenario4.html` | A status flips `Pending...` to `Done`. Passing the *locator* to `expect` auto-retries; pulling out an awaited *value* (`textContent()`) takes a stale one-shot snapshot. Its third test fails **on purpose** - that failure is the lesson. Run `npx playwright test scenario4` to demo it. |
 
 ## Timing knobs
 

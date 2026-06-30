@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scenario 4 - await inside expect</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Scenario 4 - await inside expect</h1>
+  <p class="lede">
+    The status below <strong>exists at load</strong> showing <code>Pending...</code>, and flips to
+    <code>Done</code> after a random delay. Because the element is present immediately, reading its
+    text right away (an awaited value) captures the stale <code>Pending...</code> - while a locator
+    assertion keeps re-checking until it says <code>Done</code>.
+    <span class="pill">tip: add ?delay=8000 to the URL to force a long wait</span>
+  </p>
+
+  <div class="card">
+    <p class="status" id="countdown">Working...</p>
+    <div class="target">
+      <span data-testid="job-status" id="job-status" class="pill" style="font-size:1rem;padding:.5rem 1rem;">Pending...</span>
+    </div>
+  </div>
+
+  <a class="back" href="index.html">Back to menu</a>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const override = Number(params.get('delay'));
+    const delay = Number.isFinite(override) && override > 0
+      ? override
+      : Math.round(1500 + Math.random() * 2000); // 1.5s - 3.5s: under the 5s timeout, above read time
+
+    const countdown = document.getElementById('countdown');
+    const status = document.getElementById('job-status');
+    const start = Date.now();
+
+    const tick = () => {
+      const remaining = Math.max(0, delay - (Date.now() - start));
+      if (remaining > 0) {
+        countdown.textContent = `Job finishes in ${(remaining / 1000).toFixed(1)}s...`;
+        requestAnimationFrame(tick);
+      }
+    };
+    tick();
+
+    setTimeout(() => {
+      status.textContent = 'Done';
+      status.style.background = '#d7f7e2';
+      status.style.color = '#06301a';
+      countdown.textContent = `Flipped to "Done" after ${(delay / 1000).toFixed(1)}s.`;
+    }, delay);
+  </script>
+</body>
+</html>
