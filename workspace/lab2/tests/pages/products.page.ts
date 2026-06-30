@@ -16,49 +16,67 @@ import { Page, Locator } from '@playwright/test';
 export class ProductsPage {
   constructor(private readonly page: Page) {}
 
-  // --- Task 4: fill in each body. ---
-
   /**
    * Navigate to the products page. Pass query params (e.g. `{ q: 'Tape' }` or
    * `{ category: 'tape' }`) to land with a search or category pre-applied.
    */
   async goto(params?: { category?: string; q?: string }): Promise<void> {
-    throw new Error('TODO: navigate to /products (optionally with ?category= or ?q=)');
-  }
+    let uri = '/products';
+    const hasCategory = params?.category != null && params?.category != '';
+    const hasItem = params?.q != null && params?.category != '';
 
+    if (hasCategory && hasItem)
+      uri = uri + `?q=${params?.q}&category=${params?.category}`;
+    else if (hasCategory)
+      uri = uri + `?category=${params?.category}`;
+    else if (hasItem)
+      uri = uri + `?q=${params?.q}`;
+
+    await this.page.goto(uri);
+  }
+  
   /** Pick a category by slug (e.g. 'tape', 'boxes', 'all'). */
   async selectCategory(slug: string): Promise<void> {
-    throw new Error('TODO: check the category radio for `slug`');
+    const id = 'category-radio-' + slug.toLowerCase();
+    try {
+      await this.page.getByTestId(id).click({ timeout: 1000 });
+    } catch {
+      throw new Error(`Category "${slug}" not found.`);
+    }
   }
 
   /** Turn on the "in stock only" filter. */
   async toggleInStockOnly(): Promise<void> {
-    throw new Error('TODO: check the "in stock only" box');
+    const id = 'in-stock-only';
+    await this.page.getByTestId(id).click();
   }
 
   /** Choose a sort order. */
   async sortBy(order: 'featured' | 'price-asc' | 'price-desc'): Promise<void> {
-    throw new Error('TODO: select the sort order');
+    await this.page.getByTestId('sort-select').selectOption(order);
   }
 
   /** Read the displayed results count and return it as a number. */
   async getResultsCount(): Promise<number> {
-    throw new Error('TODO: read the results-count text, return it as a number');
+    const currentResults = await this.page.getByTestId('results-count').textContent();
+    const resultCount = parseInt(currentResults ?? '0');
+    return resultCount;
   }
 
   /** Every product row in the results grid (role="row"). */
   rows(): Locator {
-    throw new Error('TODO: return all product rows (role="row")');
+    return this.page.getByRole('row');
   }
 
   /** The row(s) whose visible text contains `name` (may match more than one). */
   rowByName(name: string): Locator {
-    throw new Error('TODO: return the row(s) whose text contains `name`');
+    return this.page.getByRole('row').getByText(name, { exact: false });
   }
 
   /** How many product rows are currently shown. */
   async getRowCount(): Promise<number> {
-    throw new Error('TODO: return how many product rows are shown');
+    let rows = this.rows();
+    return await rows.count();
   }
 
   /** The price text shown for the row named `name`. */
@@ -69,3 +87,4 @@ export class ProductsPage {
   // Tasks 7 & 8: you will ADD methods here (add-to-cart by name + price; open
   // the category mega-menu and click a subcategory by role + visible text).
 }
+
