@@ -1,8 +1,9 @@
 import { test, expect } from '../fixtures/standupTest.js';
 
 /**
- * No new StandupPage(page) or goto() here — the standupPage fixture
- * (see fixtures/standupTest.ts) handles shared setup for every test.
+ * These tests use standupPage — a dependent fixture that chains off loginPage,
+ * performs mock login, and hands off StandupPage already on the board.
+ * See fixtures/standupTest.ts.
  */
 test.describe('Team standup board', () => {
   test('loads with three open tasks', async ({ standupPage }) => {

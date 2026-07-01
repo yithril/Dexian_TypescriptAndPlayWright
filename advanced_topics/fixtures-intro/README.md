@@ -4,8 +4,8 @@ A minimal Playwright example whose **only job** is to teach **custom fixtures**:
 what they are, why they help DRY, and how they relate to the repetitive setup in
 [messy-locators](../messy-locators/).
 
-The app is a simple **team standup board** with clean, accessible markup — no
-locator tricks. The lesson is setup and injection, not finding elements.
+The app is a **team standup board** behind a mock sign-in page — clean, accessible
+markup, no real auth backend. The lesson is setup and injection, not finding elements.
 
 ## Run it
 
@@ -40,11 +40,12 @@ test. You never wrote `browser.newPage()` — that is a **built-in fixture**.
 A **custom fixture** adds more injectables the same way:
 
 ```typescript
-test('my test', async ({ standupPage }) => { ... });
+test('my test', async ({ loginPage }) => { ... });
+test('board test', async ({ standupPage }) => { ... });
 ```
 
-You register `standupPage` once in [`fixtures/standupTest.ts`](fixtures/standupTest.ts).
-Playwright builds it before each test and hands it to you.
+You register fixtures once in [`fixtures/standupTest.ts`](fixtures/standupTest.ts).
+Playwright builds them before each test and hands them to you.
 
 ## Before vs after (DRY)
 
@@ -71,17 +72,17 @@ test('assigns a unique vendor row', async ({ page }) => {
 
 Change how you open the app? Edit **every test**.
 
-### After — this project
+### After — this project (simple fixture)
 
-Shared setup lives in the fixture:
+Shared setup for the login page lives in the fixture:
 
 ```typescript
 // fixtures/standupTest.ts
 export const test = base.extend({
-  standupPage: async ({ page }, use) => {
-    const standupPage = new StandupPage(page);
-    await standupPage.goto();
-    await use(standupPage);
+  loginPage: async ({ page }, use) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await use(loginPage);
   }
 });
 ```
@@ -91,12 +92,12 @@ Specs import **your** `test` and ask for the fixture:
 ```typescript
 import { test, expect } from '../fixtures/standupTest.js';
 
-test('loads with three open tasks', async ({ standupPage }) => {
-  await expect(standupPage.taskItems()).toHaveCount(3);
+test('shows the login form', async ({ loginPage }) => {
+  await expect(loginPage.heading).toBeVisible();
 });
 ```
 
-No `new StandupPage(page)`. No `goto()`. One place to change setup.
+No `new LoginPage(page)`. No `goto()`. One place to change setup.
 
 ## How Playwright "knows" about your fixture
 
@@ -122,14 +123,79 @@ Parameter names in `async ({ standupPage })` must match what you registered in
 See [multilingual-welcome](../multilingual-welcome/) for the split: **fixture for
 `welcomePage`**, **closure for culture data**.
 
+## When a fixture depends on another fixture
+
+The simple `loginPage` fixture removes repeated construction and navigation to the
+sign-in screen. The **real value** shows up with `standupPage`: the standup board
+is **gated behind login**, so `StandupPage` logically depends on `LoginPage` — you
+cannot use one without the other.
+
+### Before — repeat login in every standup test
+
+Without a dependent fixture, each board test repeats the same login chain:
+
+```typescript
+test('loads with three open tasks', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login('demo', 'demo');
+  const standupPage = new StandupPage(page);
+  // ... finally the assertion
+});
+
+test('marks the first task done', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login('demo', 'demo');
+  const standupPage = new StandupPage(page);
+  // ... same four lines again
+});
+```
+
+### After — dependent fixture chains off the simple one
+
+Playwright builds fixtures in dependency order: `page` → `loginPage` →
+`standupPage`. The complex fixture never calls `goto()` itself — it inherits the
+login page from `loginPage`, then performs mock sign-in:
+
+```typescript
+// fixtures/standupTest.ts
+standupPage: async ({ loginPage }, use) => {
+  await loginPage.login();
+  await use(new StandupPage(loginPage.page));
+},
+```
+
+Tests for the board ask for the authenticated page object and start at the
+interesting state:
+
+```typescript
+test('loads with three open tasks', async ({ standupPage }) => {
+  await expect(standupPage.taskItems()).toHaveCount(3);
+});
+```
+
+| Fixture | What it DRYs up |
+| --- | --- |
+| `loginPage` | `new LoginPage(page)` + `goto('login.html')` |
+| `standupPage` | Mock login workflow + `StandupPage` construction |
+
+**Why this dependency is real:** visiting `index.html` without signing in redirects
+back to `login.html`. There is no standup board to test until `LoginPage.login()`
+runs — not just a preference, an app gate.
+
 ## Project layout
 
 | Path | Purpose |
 | --- | --- |
-| `index.html`, `app.js` | Simple standup board |
-| `pages/standup.page.ts` | Page object |
-| `fixtures/standupTest.ts` | Custom `test` with `standupPage` fixture |
-| `tests/standup.spec.ts` | Three tests — `{ standupPage }` only |
+| `login.html`, `login.js` | Mock sign-in page |
+| `index.html`, `app.js` | Standup board (auth-gated) |
+| `pages/login.page.ts` | Login page object |
+| `pages/standup.page.ts` | Standup board page object |
+| `pages/standup-task-list.page.ts` | Nested component page object (task list region) |
+| `fixtures/standupTest.ts` | Custom `test` with `loginPage` and `standupPage` fixtures |
+| `tests/login.spec.ts` | Simple tests — `{ loginPage }` |
+| `tests/standup.spec.ts` | Dependent-fixture tests — `{ standupPage }` |
 
 ## Teaching arc in this repo
 
@@ -156,3 +222,5 @@ flowchart LR
 3. **Import your extended `test`** — that wires everything up.
 4. **Fixtures build things** — data rows from a loop are a different pattern (see
    multilingual-welcome README).
+5. **Dependent fixtures** — chain off a simpler fixture to DRY workflows like login;
+   `StandupPage` depends on `LoginPage` because the app requires sign-in first.

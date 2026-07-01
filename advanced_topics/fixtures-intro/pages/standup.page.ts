@@ -1,7 +1,10 @@
 import type { Locator, Page } from '@playwright/test';
+import { StandupTaskList } from './standup-task-list.page.js';
 
 /**
  * Page object for the team standup board (index.html).
+ * The app redirects here only after login — use LoginPage first, or the
+ * standupPage fixture which logs in via the loginPage fixture.
  */
 export class StandupPage {
   constructor(private readonly page: Page) {}
@@ -10,24 +13,28 @@ export class StandupPage {
     return this.page.getByRole('heading', { name: 'Team standup' });
   }
 
-  get taskList() {
+  get taskListRoot() {
     return this.page.getByRole('list', { name: 'Standup tasks' });
   }
 
+  get taskList() {
+    return new StandupTaskList(this.taskListRoot);
+  }
+
   taskItems() {
-    return this.taskList.getByRole('listitem');
+    return this.taskList.items();
   }
 
   taskByTitle(title: string) {
-    return this.taskItems().filter({ hasText: title });
+    return this.taskList.byTitle(title);
   }
 
   markDoneButtonForTask(task: Locator) {
-    return task.getByRole('button', { name: 'Mark done' });
+    return this.taskList.markDoneButtonForTask(task);
   }
 
   statusInTask(task: Locator) {
-    return task.locator('.task-status');
+    return this.taskList.statusInTask(task);
   }
 
   doneStatuses() {
