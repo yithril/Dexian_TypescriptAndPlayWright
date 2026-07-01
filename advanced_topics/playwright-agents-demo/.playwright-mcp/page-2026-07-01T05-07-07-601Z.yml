@@ -1,0 +1,16 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: GL
+      - generic [ref=e7]: GearLoop
+    - paragraph [ref=e8]: Internal equipment checkout
+    - heading "Sign in to your workspace" [level=1] [ref=e9]
+    - generic [ref=e10]:
+      - generic [ref=e11]: Work email
+      - textbox "you@company.com" [ref=e12]
+    - generic [ref=e13]:
+      - generic [ref=e14]: Password
+      - textbox "Enter your password" [ref=e15]: secret123
+    - paragraph [ref=e18]: Enter an email and password to continue.
+    - link "Enter portal" [active] [ref=e16] [cursor=pointer]
+    - paragraph [ref=e17]: Any email and password will work in this demo.

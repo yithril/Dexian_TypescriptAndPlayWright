@@ -29,16 +29,5 @@ equipment (monitors, keyboards, projectors, docks) to their desk.
 
 ## Known reality (important for the tester)
 
-This markup was hand-written by product engineers, not with testing in mind:
-
-- There are **no `data-testid` attributes** anywhere.
-- The sign-in button is a styled `div`, not a real `<button>`.
-- Every catalog card has an **identical "Check out" button label**.
-- Two cards share the **same item name** ("Dell Monitor") with different asset
-  tags.
-- The search box and the password/email inputs have **placeholders but no
-  associated labels**.
-- The hide button is **icon-only** (a "times" glyph) with no accessible name.
-
 The tester has to work with this markup as-is. Locators should be scoped to a
 single card and prefer resilient strategies over brittle ones.

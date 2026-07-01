@@ -1,0 +1,58 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: GL
+      - generic [ref=e6]: GearLoop
+    - searchbox "Find equipment..." [ref=e7]
+    - generic [ref=e8]: Signed in as Sam
+  - main [ref=e9]:
+    - generic [ref=e10]:
+      - heading "Available equipment" [level=1] [ref=e11]
+      - paragraph [ref=e12]: Pick an item and check it out to your desk.
+    - generic [ref=e13]:
+      - article [ref=e14]:
+        - generic [ref=e15]: M
+        - generic [ref=e16]:
+          - heading "Dell Monitor" [level=2] [ref=e17]
+          - paragraph [ref=e18]: Asset DM-2201 · 27" 4K
+          - generic [ref=e19]: Available
+        - generic [ref=e20]:
+          - button "Check out" [ref=e21] [cursor=pointer]
+          - button "Hide" [ref=e22] [cursor=pointer]: ×
+      - article [ref=e23]:
+        - generic [ref=e24]: M
+        - generic [ref=e25]:
+          - heading "Dell Monitor" [level=2] [ref=e26]
+          - paragraph [ref=e27]: Asset DM-2202 · 27" 4K
+          - generic [ref=e28]: Available
+        - generic [ref=e29]:
+          - button "Check out" [ref=e30] [cursor=pointer]
+          - button "Hide" [ref=e31] [cursor=pointer]: ×
+      - article [ref=e32]:
+        - generic [ref=e33]: P
+        - generic [ref=e34]:
+          - heading "Epson Projector" [level=2] [ref=e35]
+          - paragraph [ref=e36]: Asset EP-0480 · 1080p
+          - generic [ref=e37]: Available
+        - generic [ref=e38]:
+          - button "Check out" [ref=e39] [cursor=pointer]
+          - button "Hide" [ref=e40] [cursor=pointer]: ×
+      - article [ref=e41]:
+        - generic [ref=e42]: K
+        - generic [ref=e43]:
+          - heading "Logitech Keyboard" [level=2] [ref=e44]
+          - paragraph [ref=e45]: Asset LK-7788 · Mechanical
+          - generic [ref=e46]: Available
+        - generic [ref=e47]:
+          - button "Check out" [ref=e48] [cursor=pointer]
+          - button "Hide" [ref=e49] [cursor=pointer]: ×
+      - article [ref=e50]:
+        - generic [ref=e51]: D
+        - generic [ref=e52]:
+          - heading "Docking Station" [level=2] [ref=e53]
+          - paragraph [ref=e54]: Asset DS-3310 · Thunderbolt
+          - generic [ref=e55]: Available
+        - generic [ref=e56]:
+          - button "Check out" [ref=e57] [cursor=pointer]
+          - button "Hide" [ref=e58] [cursor=pointer]: ×
+  - contentinfo [ref=e59]: Need something not listed? Check out the full asset request form.
