@@ -21,7 +21,8 @@ document.querySelectorAll('.legacy_tbl__r[role="row"]').forEach((row) => {
   const deleteButton = row.querySelector('.legacy_btn__del');
   const statusSpan = row.querySelector('.legacy_tbl__st');
 
-  assignButton?.addEventListener('click', () => {
+  assignButton?.addEventListener('click', (event) => {
+    event.preventDefault();
     if (statusSpan) {
       statusSpan.textContent = 'Assigned';
     }

@@ -4,12 +4,13 @@ A self-contained Playwright example for **real-world markup you cannot control**
 hashed CSS classes, div soup, duplicate labels, missing accessibility — and **no
 `data-testid` hooks**.
 
-The mock app is a legacy third-party **invoice queue** widget. Tests use role,
-text, `filter()`, and scoping — strategies centralized in a page object.
+The mock app is a legacy third-party **invoice queue** widget. Three tests in the
+spec file each demonstrate one locator API — `filter()`, `.and()`, and `.or()` —
+with inline comments you can walk through in class.
 
-A separate **fixtures intro** demo (coming later) will show how to inject the page
-object automatically. Here, every test starts with `new InvoicePortalPage(page)` on
-purpose so you feel that repetition.
+A separate **fixtures intro** demo (coming later) will move locators into the page
+object and inject it automatically. Here, every test starts with
+`new InvoicePortalPage(page)` only for `goto()`.
 
 ## Run it
 
@@ -37,19 +38,18 @@ If Chrome is not installed, change `channel: 'chrome'` to `channel: 'msedge'` in
 | No test ids | Nothing | Role, text, filter — not `getByTestId` |
 | Hashed classes | `legacy_tbl__x7f2` | Ignore classes when possible |
 | Div soup grid | `role="table"` / `role="row"` | `getByRole('row')` + filter |
-| Duplicate vendor | Two **Acme Corp** rows | `filter({ hasText: vendor }).filter({ hasText: amount })` |
+| Duplicate vendor | Two **Acme Corp** rows | `filter({ hasText })` chained or `.and()` |
 | Identical buttons | Every row has **Assign** | Scope: `row.getByRole('button', { name: 'Assign' })` |
-| Bad search field | Placeholder only, no label | `getByPlaceholder()` (last resort) |
+| Mixed controls | Contoso uses a link, others use buttons | `.or()` for button vs link |
 | Icon-only delete | `×` with no aria-label | Scope to row + `.last()` button — fragile, documented |
 
-## Locator strategies (in order of preference)
+## Three tests, three APIs
 
-1. **Role + name** — `getByRole('button', { name: 'Assign' })` when scoped to a row
-2. **filter()** — narrow `getByRole('row')` by visible text
-3. **Chained filters** — duplicate vendors: filter by name, then by amount
-4. **`.and()`** — alternative to chaining two filters (see page object)
-5. **Placeholder** — when there is no label at all
-6. **CSS / nth / last()** — escape hatches when a11y is missing (delete button)
+| Test | API | Scenario |
+| --- | --- | --- |
+| `filter() picks one row when vendor name is duplicated` | `.filter({ hasText })` | Two **Acme Corp** rows → filter by vendor + amount |
+| `.and() requires every condition on the same element` | `.and(otherLocator)` | Same Acme row, intersection syntax instead of chained filters |
+| `.or() handles mixed control types in legacy markup` | `.or(otherLocator)` | Contoso link **Assign invoice** vs button **Assign** |
 
 ## Strict mode
 
@@ -62,8 +62,8 @@ the first match.
 | Path | Purpose |
 | --- | --- |
 | `index.html`, `app.js` | Legacy invoice grid (intentionally bad markup) |
-| `pages/invoice-portal.page.ts` | Messy locator strategies — write once |
-| `tests/invoice-portal.spec.ts` | Four tests; standard `@playwright/test` import |
+| `pages/invoice-portal.page.ts` | `goto()` only — locators live in the spec for now |
+| `tests/invoice-portal.spec.ts` | Three teaching tests with inline locators and comments |
 
 ## Spec pattern (no fixture)
 
@@ -71,13 +71,21 @@ the first match.
 import { test, expect } from '@playwright/test';
 import { InvoicePortalPage } from '../pages/invoice-portal.page.js';
 
-test('assigns a unique vendor row', async ({ page }) => {
+test('filter() picks one row when vendor name is duplicated', async ({ page }) => {
   const portal = new InvoicePortalPage(page);
   await portal.goto();
 
-  const row = portal.rowByVendor('Northwind Traders');
-  await portal.assignButtonForRow(row).click();
-  await expect(portal.statusInRow(row, 'Assigned')).toBeVisible();
+  const dataRows = page.getByRole('row').filter({
+    has: page.getByRole('button', { name: 'Assign' }),
+  });
+
+  const acme415 = dataRows
+    .filter({ hasText: 'Acme Corp' })
+    .filter({ hasText: '$415.50' });
+
+  await expect(acme415).toHaveCount(1);
+  await acme415.getByRole('button', { name: 'Assign' }).click();
+  await expect(acme415.getByText('Assigned', { exact: true })).toBeVisible();
 });
 ```
 
@@ -85,9 +93,10 @@ test('assigns a unique vendor row', async ({ page }) => {
 
 1. **Clean vs messy** — BulkBox lab has a "clean zone" (test ids) and a "messy zone"
    (third-party grid). This demo is all messy zone.
-2. **Page object** — ugly locators live in one file; specs read like test steps.
-3. **Fixtures (next demo)** — inject `InvoicePortalPage` so you drop
-   `new InvoicePortalPage(page)` and `goto()` from every test.
+2. **Read locators in the spec first** — three focused tests with comments; no
+   hidden helpers.
+3. **Page object + fixtures (next demo)** — move locators into `InvoicePortalPage`
+   and inject it so you drop `new InvoicePortalPage(page)` from every test.
 4. **Ask devs for better a11y** — but ship tests anyway with the strategies above.
 
 ## Data flow
@@ -95,9 +104,10 @@ test('assigns a unique vendor row', async ({ page }) => {
 ```mermaid
 flowchart LR
   spec[invoice-portal.spec.ts]
-  pageObj[InvoicePortalPage]
+  pageObj[InvoicePortalPage.goto]
   html[index.html legacy grid]
 
+  spec -->|"filter and and or inline"| html
   spec -->|"new InvoicePortalPage page"| pageObj
-  pageObj -->|"filter scope placeholder"| html
+  pageObj -->|goto| html
 ```
