@@ -1,0 +1,134 @@
+:root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  line-height: 1.45;
+  --bg: #ece9e3;
+  --panel: #f7f5f1;
+  --border: #c8c2b8;
+  --text: #2c2824;
+  --muted: #6b6560;
+  --accent: #8b4513;
+  --row-alt: #f0ebe3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.legacy_wrap__k3p9 {
+  max-width: 920px;
+  margin: 0 auto;
+  border: 2px solid var(--border);
+  background: var(--panel);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.legacy_hdr__m2x1 {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px dashed var(--border);
+  background: linear-gradient(#faf8f4, #ebe6de);
+}
+
+.legacy_hdr__t {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.legacy_hdr__sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.legacy_toolbar__q8n {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.legacy_toolbar__inp {
+  width: 100%;
+  max-width: 280px;
+  padding: 0.45rem 0.6rem;
+  border: 1px inset var(--border);
+  font: inherit;
+  background: #fff;
+}
+
+.legacy_tbl__x7f2 {
+  padding: 0.5rem 0;
+}
+
+.legacy_tbl__hdr__p4 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.legacy_tbl__r {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.65rem 1.25rem;
+  border-bottom: 1px dotted var(--border);
+}
+
+.legacy_tbl__r:nth-child(even) {
+  background: var(--row-alt);
+}
+
+.legacy_tbl__r[hidden] {
+  display: none;
+}
+
+.legacy_tbl__st {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 0.85rem;
+  background: #fff;
+}
+
+.legacy_tbl__act {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.legacy_btn {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.legacy_btn__asg {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+.legacy_btn__del {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  line-height: 1;
+  color: #888;
+}
+
+.legacy_btn__del:hover {
+  color: #c00;
+}

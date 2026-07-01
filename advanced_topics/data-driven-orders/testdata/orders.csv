@@ -1,0 +1,9 @@
+testId,searchQuery,attn,poNumber,specialInstructions,shippingAddress,shippingMethod
+WP_01,H-101,Internet QA WP_01,WP_01,Weekly Prod Smoke Test 01,Billing Address,UPS Ground - Collect
+WP_02,H-202,Internet QA WP_02,WP_02,Weekly Prod Smoke Test 02,New York Warehouse,UPS Ground - Prepaid
+WP_03,H-101,Internet QA WP_03,WP_03,Weekly Prod Smoke Test 03,Billing Address,UPS Ground - Collect
+WP_04,H-303,Internet QA WP_04,WP_04,Weekly Prod Smoke Test 04,Chicago Warehouse,FedEx Express
+WP_05,H-404,Internet QA WP_05,WP_05,Weekly Prod Smoke Test 05,Billing Address,UPS Ground - Prepaid
+WP_06,H-505,Internet QA WP_06,WP_06,Weekly Prod Smoke Test 06,New York Warehouse,UPS Ground - Collect
+WP_07,H-606,Internet QA WP_07,WP_07,Weekly Prod Smoke Test 07,Chicago Warehouse,UPS Ground - Prepaid
+WP_08,H-707,Internet QA WP_08,WP_08,Weekly Prod Smoke Test 08,Billing Address,FedEx Express

@@ -44,6 +44,6 @@ test.describe('How locators really work', () => {
     // The button starts disabled and is enabled after a random delay.
     // click() auto-waits for it to be enabled - no explicit wait needed.
     await page.getByRole('button', { name: 'Submit' }).click();
-    await expect(page.getByText('Submitted!')).toBeVisible();
+    await expect(page.getByText('Submitted!')).toBeVisible(); // wait for the spinner to disappear
   });
 });

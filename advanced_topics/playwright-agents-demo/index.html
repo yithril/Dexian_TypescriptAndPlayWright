@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GearLoop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="signin-body">
+  <div class="aurora" aria-hidden="true"></div>
+
+  <main class="signin-shell">
+    <section class="signin-card">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">GL</span>
+        <span class="brand-name">GearLoop</span>
+      </div>
+
+      <p class="kicker">Internal equipment checkout</p>
+      <h1 class="signin-title">Sign in to your workspace</h1>
+
+      <!-- Human-written form: inputs use placeholders, the labels are plain
+           spans that are not tied to the inputs with for/id. -->
+      <div class="field">
+        <span class="field-hint">Work email</span>
+        <input type="email" class="ipt" placeholder="you@company.com" />
+      </div>
+
+      <div class="field">
+        <span class="field-hint">Password</span>
+        <input type="password" class="ipt" placeholder="Enter your password" />
+      </div>
+
+      <p class="signin-error" hidden>Enter an email and password to continue.</p>
+
+      <!-- The "button" is a styled div, not a real <button>. Classic
+           hand-rolled UI. getByRole('button', { name: 'Enter portal' })
+           will NOT find this. -->
+      <div class="gate-action" tabindex="0" role="link">Enter portal</div>
+
+      <p class="signin-foot">
+        Any email and password will work in this demo.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

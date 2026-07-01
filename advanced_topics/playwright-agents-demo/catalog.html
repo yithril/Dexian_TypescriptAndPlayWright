@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GearLoop — Equipment catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="catalog-body">
+  <div class="aurora" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">GL</span>
+      <span class="brand-name">GearLoop</span>
+    </div>
+    <!-- Search field has a placeholder but no associated label. -->
+    <input type="search" class="search" placeholder="Find equipment..." />
+    <div class="who">Signed in as Sam</div>
+  </header>
+
+  <main class="catalog">
+    <div class="catalog-head">
+      <h1 class="catalog-title">Available equipment</h1>
+      <p class="catalog-sub">Pick an item and check it out to your desk.</p>
+    </div>
+
+    <div class="grid">
+      <!-- Each card carries its own "Check out" button with identical text.
+           A page-level getByRole('button', { name: 'Check out' }) resolves to
+           every card at once (strict mode violation). Locators must be scoped
+           to a single card. -->
+
+      <article class="equip-card">
+        <div class="equip-photo" aria-hidden="true">M</div>
+        <div class="equip-body">
+          <h2 class="equip-name">Dell Monitor</h2>
+          <p class="equip-tag">Asset DM-2201 &middot; 27" 4K</p>
+          <span class="badge badge-open">Available</span>
+        </div>
+        <div class="equip-actions">
+          <button type="button" class="btn btn-primary">Check out</button>
+          <button type="button" class="btn btn-icon" title="Hide"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </article>
+
+      <!-- Duplicate item name on purpose: two "Dell Monitor" cards with
+           different asset tags. getByText('Dell Monitor') matches both. -->
+      <article class="equip-card">
+        <div class="equip-photo" aria-hidden="true">M</div>
+        <div class="equip-body">
+          <h2 class="equip-name">Dell Monitor</h2>
+          <p class="equip-tag">Asset DM-2202 &middot; 27" 4K</p>
+          <span class="badge badge-open">Available</span>
+        </div>
+        <div class="equip-actions">
+          <button type="button" class="btn btn-primary">Check out</button>
+          <button type="button" class="btn btn-icon" title="Hide"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </article>
+
+      <article class="equip-card">
+        <div class="equip-photo" aria-hidden="true">P</div>
+        <div class="equip-body">
+          <h2 class="equip-name">Epson Projector</h2>
+          <p class="equip-tag">Asset EP-0480 &middot; 1080p</p>
+          <span class="badge badge-open">Available</span>
+        </div>
+        <div class="equip-actions">
+          <button type="button" class="btn btn-primary">Check out</button>
+          <button type="button" class="btn btn-icon" title="Hide"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </article>
+
+      <article class="equip-card">
+        <div class="equip-photo" aria-hidden="true">K</div>
+        <div class="equip-body">
+          <h2 class="equip-name">Logitech Keyboard</h2>
+          <p class="equip-tag">Asset LK-7788 &middot; Mechanical</p>
+          <span class="badge badge-open">Available</span>
+        </div>
+        <div class="equip-actions">
+          <button type="button" class="btn btn-primary">Check out</button>
+          <button type="button" class="btn btn-icon" title="Hide"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </article>
+
+      <article class="equip-card">
+        <div class="equip-photo" aria-hidden="true">D</div>
+        <div class="equip-body">
+          <h2 class="equip-name">Docking Station</h2>
+          <p class="equip-tag">Asset DS-3310 &middot; Thunderbolt</p>
+          <span class="badge badge-open">Available</span>
+        </div>
+        <div class="equip-actions">
+          <button type="button" class="btn btn-primary">Check out</button>
+          <button type="button" class="btn btn-icon" title="Hide"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Noise: a help bar that also contains the words "Check out" so naive
+       text locators have even more to trip on. -->
+  <footer class="help-bar">
+    <span>Need something not listed? Check out the full asset request form.</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GlobeMart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">🌐</span>
+      <span class="brand-name">GlobeMart</span>
+    </div>
+    <label class="culture-picker">
+      <span data-i18n="cultureLabel">Region</span>
+      <select id="culture">
+        <option value="us">United States</option>
+        <option value="ca">Canada</option>
+        <option value="mx">México</option>
+        <option value="fr">France</option>
+        <option value="es">España</option>
+      </select>
+    </label>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <nav class="nav" aria-label="Main">
+        <a href="#" data-i18n="navHome">Home</a>
+        <a href="#" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="hero-copy">
+        <p class="eyebrow">Global marketplace</p>
+        <h1 data-i18n="title">Welcome to GlobeMart</h1>
+        <p class="tagline" data-i18n="tagline">Shop local, ship worldwide.</p>
+        <a href="#" class="login" data-i18n="loginLabel">Log in</a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="globe-card">
+          <span class="globe-icon">🛒</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

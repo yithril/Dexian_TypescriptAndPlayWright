@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Checkout — Data-driven demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Order Checkout</h1>
+      <p class="lede">Mock checkout flow for Playwright data-driven testing demos.</p>
+    </header>
+
+    <form id="order-form" novalidate>
+      <section class="panel" aria-labelledby="product-heading">
+        <h2 id="product-heading">1. Product search</h2>
+        <div class="field-row">
+          <label for="search-query">Search product</label>
+          <input
+            id="search-query"
+            name="searchQuery"
+            type="text"
+            data-testid="search-query"
+            placeholder="e.g. H-101"
+            required
+          />
+          <button type="button" id="search-button" data-testid="search-button">Search</button>
+        </div>
+        <div id="search-result" class="search-result" data-testid="search-result" hidden>
+          <p class="result-label">Product found:</p>
+          <p id="product-name" data-testid="product-name"></p>
+          <button type="button" id="add-to-cart" data-testid="add-to-cart">Add to cart</button>
+        </div>
+        <p id="cart-status" class="status" data-testid="cart-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="panel" aria-labelledby="shipping-heading">
+        <h2 id="shipping-heading">2. Shipping</h2>
+        <div class="field">
+          <label for="attn">Attention</label>
+          <input id="attn" name="attn" type="text" data-testid="attn" required />
+        </div>
+        <div class="field">
+          <label for="shipping-address">Shipping address</label>
+          <select id="shipping-address" name="shippingAddress" data-testid="shipping-address" required>
+            <option value="">Select an address…</option>
+            <option value="Billing Address">Billing Address</option>
+            <option value="New York Warehouse">New York Warehouse</option>
+            <option value="Chicago Warehouse">Chicago Warehouse</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="order-heading">
+        <h2 id="order-heading">3. Order details</h2>
+        <div class="field">
+          <label for="po-number">PO Number</label>
+          <input id="po-number" name="poNumber" type="text" data-testid="po-number" required />
+        </div>
+        <div class="field">
+          <label for="special-instructions">Special instructions</label>
+          <textarea
+            id="special-instructions"
+            name="specialInstructions"
+            data-testid="special-instructions"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+        <div class="field">
+          <label for="shipping-method">Shipping method</label>
+          <select id="shipping-method" name="shippingMethod" data-testid="shipping-method" required>
+            <option value="">Select a method…</option>
+            <option value="UPS Ground - Collect">UPS Ground - Collect</option>
+            <option value="UPS Ground - Prepaid">UPS Ground - Prepaid</option>
+            <option value="FedEx Express">FedEx Express</option>
+          </select>
+        </div>
+      </section>
+
+      <button type="submit" class="primary" data-testid="place-order">Place order</button>
+    </form>
+
+    <section id="summary" class="summary" data-testid="summary" hidden aria-live="polite">
+      <h2>Order summary</h2>
+      <dl>
+        <div><dt>Product</dt><dd id="summary-product" data-testid="summary-product"></dd></div>
+        <div><dt>Attention</dt><dd id="summary-attn" data-testid="summary-attn"></dd></div>
+        <div><dt>PO Number</dt><dd id="summary-po" data-testid="summary-po"></dd></div>
+        <div><dt>Special instructions</dt><dd id="summary-instructions" data-testid="summary-instructions"></dd></div>
+        <div><dt>Shipping address</dt><dd id="summary-address" data-testid="summary-address"></dd></div>
+        <div><dt>Shipping method</dt><dd id="summary-method" data-testid="summary-method"></dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

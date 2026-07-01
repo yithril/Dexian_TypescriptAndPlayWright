@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legacy Billing Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="legacy_wrap legacy_wrap__k3p9">
+    <header class="legacy_hdr legacy_hdr__m2x1">
+      <h1 class="legacy_hdr__t">Invoice queue</h1>
+      <p class="legacy_hdr__sub">Third-party widget — markup we cannot change</p>
+    </header>
+
+    <!-- No label — placeholder only (bad a11y) -->
+    <div class="legacy_toolbar legacy_toolbar__q8n">
+      <input type="search" placeholder="Search invoices" class="legacy_toolbar__inp" />
+    </div>
+
+    <!-- Div soup pretending to be a table. Hashed classes, no data-testid. -->
+    <div class="legacy_tbl legacy_tbl__x7f2" role="table" aria-label="Invoice results">
+      <div class="legacy_tbl__hdr legacy_tbl__hdr__p4" role="row">
+        <div class="legacy_tbl__c legacy_tbl__c__a1" role="columnheader">Vendor</div>
+        <div class="legacy_tbl__c legacy_tbl__c__a2" role="columnheader">Amount</div>
+        <div class="legacy_tbl__c legacy_tbl__c__a3" role="columnheader">Status</div>
+        <div class="legacy_tbl__c legacy_tbl__c__a4" role="columnheader">Actions</div>
+      </div>
+
+      <div class="legacy_tbl__r legacy_tbl__r__001" role="row">
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">Northwind Traders</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">$890.00</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell"><span class="legacy_tbl__st">Open</span></div>
+        <div class="legacy_tbl__c legacy_tbl__m9 legacy_tbl__act" role="cell">
+          <button type="button" class="legacy_btn legacy_btn__asg">Assign</button>
+          <button type="button" class="legacy_btn legacy_btn__del"><span aria-hidden="true">×</span></button>
+        </div>
+      </div>
+
+      <div class="legacy_tbl__r legacy_tbl__r__002" role="row">
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">Acme Corp</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">$1,240.00</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell"><span class="legacy_tbl__st">Open</span></div>
+        <div class="legacy_tbl__c legacy_tbl__m9 legacy_tbl__act" role="cell">
+          <button type="button" class="legacy_btn legacy_btn__asg">Assign</button>
+          <button type="button" class="legacy_btn legacy_btn__del"><span aria-hidden="true">×</span></button>
+        </div>
+      </div>
+
+      <div class="legacy_tbl__r legacy_tbl__r__003" role="row">
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">Acme Corp</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">$415.50</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell"><span class="legacy_tbl__st">Open</span></div>
+        <div class="legacy_tbl__c legacy_tbl__m9 legacy_tbl__act" role="cell">
+          <button type="button" class="legacy_btn legacy_btn__asg">Assign</button>
+          <button type="button" class="legacy_btn legacy_btn__del"><span aria-hidden="true">×</span></button>
+        </div>
+      </div>
+
+      <div class="legacy_tbl__r legacy_tbl__r__004" role="row">
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">Globex Industries</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">$2,100.00</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell"><span class="legacy_tbl__st">Open</span></div>
+        <div class="legacy_tbl__c legacy_tbl__m9 legacy_tbl__act" role="cell">
+          <button type="button" class="legacy_btn legacy_btn__asg">Assign</button>
+          <button type="button" class="legacy_btn legacy_btn__del"><span aria-hidden="true">×</span></button>
+        </div>
+      </div>
+
+      <div class="legacy_tbl__r legacy_tbl__r__005" role="row">
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">Contoso Ltd</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell">$675.25</div>
+        <div class="legacy_tbl__c legacy_tbl__m9" role="cell"><span class="legacy_tbl__st">Open</span></div>
+        <div class="legacy_tbl__c legacy_tbl__m9 legacy_tbl__act" role="cell">
+          <button type="button" class="legacy_btn legacy_btn__asg">Assign</button>
+          <button type="button" class="legacy_btn legacy_btn__del"><span aria-hidden="true">×</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

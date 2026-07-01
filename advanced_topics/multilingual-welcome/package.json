@@ -1,0 +1,17 @@
+{
+  "name": "multilingual-welcome",
+  "version": "1.0.0",
+  "description": "Playwright example: i18n testing across multiple cultures (US, CA, MX, FR, ES).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^26.0.0"
+  }
+}
